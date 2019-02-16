@@ -1,0 +1,38 @@
+{
+  "name": "typescript-lambda-api-local",
+  "description": "Test typescript AWS Lambda API's locally using express.",
+  "version": "0.1.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djfdyuruiry/typescript-lambda-api-local.git"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "clean": "rm -rf node_modules && rm -rf dist",
+    "build": "npm run clean && npm install && tsc"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "index.d.ts",
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "author": "Matthew Snoddy",
+  "license": "MIT",
+  "dependencies": {
+    "@types/command-line-args": "^5.0.0",
+    "@types/express": "^4.16.1",
+    "aws-sdk": "^2.404.0",
+    "command-line-args": "^5.0.2",
+    "express": "^4.16.4",
+    "typescript-lambda-api": "^0.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^11.9.4",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}
