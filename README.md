@@ -20,7 +20,7 @@ npm install -D @types/node
 - Create a new typescript file, add the following:
 
 ```typescript
-import path from "path"
+import * as path from "path"
 
 import { ApiConsoleApp } from "typescript-lambda-api-local"
 
