@@ -1,15 +1,21 @@
 {
   "name": "typescript-lambda-api-local",
   "description": "Test typescript AWS Lambda API's locally using express.",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/typescript-lambda-api-local.git"
   },
   "scripts": {
     "tsc": "tsc",
-    "clean": "rm -rf node_modules && rm -rf dist",
-    "build": "npm run clean && npm install && tsc"
+    "alsatian": "alsatian",
+    "clean": "git clean -fxd",
+    "clean-install": "yarn run clean && yarn install",
+    "build": "rm -rf dist && tsc",
+    "build-tests": "rm -rf tests/js && tsc -p ./tests",
+    "build-all": "yarn run build && yarn run build-tests",
+    "tests": "cat tests/banner.txt && nyc --reporter=lcov --reporter=html alsatian --tap ./tests/js/**/*Tests.js",
+    "test": "yarn run clean-install && yarn run build-all && yarn run tests"
   },
   "files": [
     "README.md",
@@ -32,6 +38,8 @@
   },
   "devDependencies": {
     "@types/node": "^11.9.4",
+    "alsatian": "^2.3.0",
+    "nyc": "^13.3.0",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
   }
