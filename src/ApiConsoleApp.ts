@@ -56,7 +56,8 @@ export class ApiConsoleApp extends ApiApp {
 
         this.server = await new Promise<Server> ((resolve, reject) => {
             try {
-                this.expressApp.listen(options.port, options.host, resolve)
+                let server = this.expressApp.listen(options.port, options.host,
+                    () => resolve(server))
             } catch (ex) {
                 reject(ex)   
             }

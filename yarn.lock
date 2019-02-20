@@ -155,6 +155,13 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
+"@types/temp@^0.8.33":
+  version "0.8.33"
+  resolved "https://registry.yarnpkg.com/@types/temp/-/temp-0.8.33.tgz#d1ac6ca261ddb8ff574ff3d40c0f29ca4801bcb1"
+  integrity sha512-lxvpXBglH4QAg9Esk75fUeK8sP7Cz29Bx3wghmjJwDxihO+xN1UN3a3HtPQXIyr4O2mzjOCapbwJ/aF7hXIOMQ==
+  dependencies:
+    "@types/node" "*"
+
 accepts@~1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.5.tgz#eb777df6011723a3b14e8a72c0805c8e86746bd2"
@@ -1440,7 +1447,7 @@ resolve@^1.10.0, resolve@^1.3.2:
   dependencies:
     path-parse "^1.0.6"
 
-rimraf@^2.6.2, rimraf@^2.6.3:
+rimraf@^2.6.2, rimraf@^2.6.3, rimraf@~2.6.2:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
   integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
@@ -1678,6 +1685,13 @@ tap-parser@^3.0.3:
     js-yaml "^3.2.7"
   optionalDependencies:
     readable-stream "^2"
+
+temp@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/temp/-/temp-0.9.0.tgz#61391795a11bd9738d4c4d7f55f012cb8f55edaa"
+  integrity sha512-YfUhPQCJoNQE5N+FJQcdPz63O3x3sdT4Xju69Gj4iZe0lBKOtnAMi0SLj9xKhGkcGhsxThvTJ/usxtFPo438zQ==
+  dependencies:
+    rimraf "~2.6.2"
 
 test-exclude@^5.1.0:
   version "5.1.0"
