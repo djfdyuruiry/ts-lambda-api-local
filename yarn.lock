@@ -1745,6 +1745,11 @@ tsutils@^2.27.2:
   dependencies:
     tslib "^1.8.1"
 
+tunnel@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/tunnel/-/tunnel-0.0.4.tgz#2d3785a158c174c9a16dc2c046ec5fc5f1742213"
+  integrity sha1-LTeFoVjBdMmhbcLARuxfxfF0IhM=
+
 type-is@~1.6.16:
   version "1.6.16"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.16.tgz#f89ce341541c672b25ee7ae3c73dee3b2be50194"
@@ -1752,6 +1757,14 @@ type-is@~1.6.16:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.18"
+
+typed-rest-client@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/typed-rest-client/-/typed-rest-client-1.1.2.tgz#3b46ecc753ed5390693d9708931b124a8c1fa1ca"
+  integrity sha512-ToUH2PwqagO3L2vcLHJc8uvJlNeioxDkHPeN5WGJLaN6VOh01GvYoo0WwPk1sHSJfrVjxAPgtrRuZQiYjwFEaw==
+  dependencies:
+    tunnel "0.0.4"
+    underscore "1.8.3"
 
 typescript-lambda-api@^0.2.3:
   version "0.2.3"
@@ -1782,6 +1795,11 @@ uglify-js@^3.1.4:
   dependencies:
     commander "~2.17.1"
     source-map "~0.6.1"
+
+underscore@1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
+  integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
