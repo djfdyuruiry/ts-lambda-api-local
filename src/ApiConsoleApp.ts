@@ -1,6 +1,7 @@
 import commandLineArgs, { OptionDefinition } from "command-line-args"
 import { NextFunction } from "connect"
 import express, { Request, Response, Application } from "express"
+import { Server } from "http";
 import { Container } from "inversify"
 
 import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig  } from "typescript-lambda-api"
@@ -22,6 +23,8 @@ export class ApiConsoleApp extends ApiApp {
 
     protected readonly controllersPath: string
     protected readonly expressApp: Application
+
+    private server?: Server
 
     public constructor(controllersPath: string, appConfig?: AppConfig, appContainer?: Container) {
         super(appConfig, appContainer)
@@ -51,12 +54,32 @@ export class ApiConsoleApp extends ApiApp {
             (req, res, next) => self.handleHttpRequest(self, req, res, next)
         )
 
-        this.expressApp.listen(options.port, options.host,
-            () => {
-                console.log(
-                    `App is now listening for HTTP requests on http://${options.host}:${options.port} ...`
-                )
-            })
+        this.server = await new Promise<Server> ((resolve, reject) => {
+            try {
+                let server = this.expressApp.listen(options.port, options.host,
+                    () => resolve(server))
+            } catch (ex) {
+                reject(ex)   
+            }
+        })
+
+        console.log(
+            `App is now listening for HTTP requests on http://${options.host}:${options.port} ...`
+        )
+    }
+
+    public async stopServer() {
+        if (!this.server) {
+            throw new Error("stopServer can only be called after runServer has been called and has completed")
+        }
+
+        await new Promise<void>((resolve, reject) => {
+            try {
+                this.server.close(resolve)
+            } catch (ex) {
+                reject(ex)
+            }
+        })
     }
 
     private parseArguments(args: string[]) {
@@ -72,8 +95,8 @@ export class ApiConsoleApp extends ApiApp {
             let apiResponse = await self.run(apiRequestEvent, {})
 
             self.forwardApiResponse(apiResponse, response)
-        } catch (e) {
-            onError(e)
+        } catch (ex) {
+            onError(ex)
         }
     }
 
@@ -89,7 +112,7 @@ export class ApiConsoleApp extends ApiApp {
             .forEach(q => apiRequest.queryStringParameters[q] = request.query[q])
 
         // read request body (if any) as a base 64 string
-        return await new Promise((resolve, reject) => {
+        return await new Promise<ApiRequest>((resolve, reject) => {
             let body = ""
 
             request.setEncoding("base64")
