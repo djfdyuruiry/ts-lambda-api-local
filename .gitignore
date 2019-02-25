@@ -79,5 +79,8 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+package-lock.json
+
 dist
 tests/js
+tests/results*.tap

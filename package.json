@@ -7,42 +7,46 @@
     "url": "https://github.com/djfdyuruiry/typescript-lambda-api-local.git"
   },
   "scripts": {
+
     "tsc": "tsc",
     "alsatian": "alsatian",
-    "clean": "rm -rf .nyc_output && rm -rf coverage && rm -rf dist && rm -rf tests/js",
-    "clean-install": "yarn run clean && yarn install",
+    "install-with-audit": "yarn install && yarn audit",
     "build": "rm -rf dist && tsc",
-    "build-tests": "rm -rf tests/js && tsc -p ./tests",
-    "build-all": "yarn run build && yarn run build-tests",
-    "tests": "cat tests/banner.txt && nyc --reporter=lcov --reporter=html alsatian --tap ./tests/js/**/*Tests.js",
-    "test": "yarn run clean && yarn run build-all && yarn run tests"
+    "build-tests": "rm -rf ./tests/js && tsc -p ./tests",
+    "build-all": "yarn run install-with-audit && yarn run build && yarn run build-tests",
+    "tests": "cat ./tests/banner.txt && nyc --reporter=lcov --reporter=html alsatian --tap ./tests/js/**/*Tests.js 2>&1 | tee tests/results.tap",
+    "test": "rm -rf .nyc_output && rm -rf coverage && yarn run build-all && yarn run tests"
   },
+  "main": "dist/typescript-lambda-api-local.js",
+  "typings": "dist/typescript-lambda-api-local.d.ts",
+  "author": "Matthew Snoddy",
+  "license": "MIT",
   "files": [
     "README.md",
     "LICENSE",
-    "index.d.ts",
     "dist/**/*.js",
     "dist/**/*.d.ts"
   ],
-  "main": "index.js",
-  "typings": "index.d.ts",
-  "author": "Matthew Snoddy",
-  "license": "MIT",
+  "nyc": {
+    "lines": 70,
+    "exclude": [
+      "tests/**/*"
+    ]
+  },
   "dependencies": {
     "@types/command-line-args": "^5.0.0",
     "@types/express": "^4.16.1",
-    "@types/temp": "^0.8.33",
     "aws-sdk": "^2.404.0",
     "command-line-args": "^5.0.2",
     "express": "^4.16.4",
-    "temp": "^0.9.0",
-    "typescript-lambda-api": "^0.2.3"
+    "typescript-lambda-api": "^0.3.0"
   },
   "devDependencies": {
     "@types/node": "^11.9.4",
+    "@types/temp": "^0.8.33",
     "alsatian": "^2.3.0",
     "nyc": "^13.3.0",
-    "tslint": "^5.12.1",
+    "temp": "^0.9.0",
     "typed-rest-client": "^1.1.2",
     "typescript": "^3.3.3"
   }
