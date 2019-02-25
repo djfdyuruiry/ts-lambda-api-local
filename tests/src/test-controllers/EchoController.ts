@@ -1,10 +1,10 @@
 import * as path from "path"
 
 import { injectable } from "inversify";
-import { GET, POST, fromBody, response  } from "typescript-lambda-api";
+import { Response } from "lambda-api";
+import { fromBody, queryParam, response, GET, POST  } from "typescript-lambda-api";
 
 import { Message } from "./Message";
-import { Response } from "lambda-api";
 
 @injectable()
 export class EchoController {
@@ -14,6 +14,13 @@ export class EchoController {
     public sayHello(): Message {
         return {
             text: "hello"
+        }
+    }
+
+    @GET("/query")
+    public sayQuery(@queryParam("message") message: string): Message {
+        return {
+            text: message
         }
     }
 

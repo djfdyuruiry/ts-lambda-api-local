@@ -71,12 +71,20 @@ export class ConsoleAcceptanceTests {
     }
 
     @AsyncTest()
+    public async when_valid_http_get_request_with_query_param_sent_then_app_passes_param_to_endpoint() {
+        let response = await this.restClient.get<Message>("/query?message=hello from query")
+
+        Expect(response.statusCode).toBe(200)
+        Expect(response.result.text).toBe("hello from query")
+    }
+
+    @AsyncTest()
     public async when_app_has_basic_auth_configured_and_request_received_with_correct_credentials_then_app_returns_200_ok() {
         await this.buildApp(app =>
             app.middlewareRegistry.addAuthFilter(new TestAuthFilter())
         )
 
-        this.restClient.client.handlers.push(
+        this.httpClient.handlers.push(
             new BasicCredentialHandler("user", "pass")
         )
 
@@ -91,7 +99,7 @@ export class ConsoleAcceptanceTests {
             app.middlewareRegistry.addAuthFilter(new TestAuthFilter())
         )
 
-        this.restClient.client.handlers.push(
+        this.httpClient.handlers.push(
             new BasicCredentialHandler("long", "walk")
         )
 
