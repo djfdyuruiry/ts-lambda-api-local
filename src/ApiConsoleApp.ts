@@ -8,11 +8,11 @@ import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig  } from "typescript-l
 
 /**
  * Simple console application that hosts an express HTTP
- * server. 
- * 
+ * server.
+ *
  * A request is mapped from the HTTP request to the ApiServer
  * event format, a ApiServer instance then processes the request.
- * The ApiServer response is mapped to a standard HTTP response and 
+ * The ApiServer response is mapped to a standard HTTP response and
  * returned to the express client.
  */
 export class ApiConsoleApp extends ApiApp {
@@ -21,15 +21,13 @@ export class ApiConsoleApp extends ApiApp {
         { name: 'host', alias: 'h', type: String, defaultValue: "127.0.0.1" }
     ]
 
-    protected readonly controllersPath: string
     protected readonly expressApp: Application
 
     private server?: Server
 
     public constructor(controllersPath: string, appConfig?: AppConfig, appContainer?: Container) {
-        super(appConfig, appContainer)
+        super(controllersPath, appConfig, appContainer)
 
-        this.controllersPath = controllersPath
         this.expressApp = express()
     }
 
@@ -40,14 +38,14 @@ export class ApiConsoleApp extends ApiApp {
 
     /**
      * Starts the express server.
-     * 
-     * @param args Command line arguments for this server, see --help for more info. 
+     *
+     * @param args Command line arguments for this server, see --help for more info.
      */
     public async runServer(args: string[]) {
         let self = this
         let options = this.parseArguments(args)
 
-        await super.initialiseControllers(this.controllersPath)
+        await super.initialiseControllers()
 
         this.expressApp.all(
             "*",
@@ -59,7 +57,7 @@ export class ApiConsoleApp extends ApiApp {
                 let server = this.expressApp.listen(options.port, options.host,
                     () => resolve(server))
             } catch (ex) {
-                reject(ex)   
+                reject(ex)
             }
         })
 
@@ -75,7 +73,7 @@ export class ApiConsoleApp extends ApiApp {
 
         await new Promise<void>((resolve, reject) => {
             try {
-                this.server.close(resolve)
+                this.server.close(() => resolve())
             } catch (ex) {
                 reject(ex)
             }
