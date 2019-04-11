@@ -1,8 +1,9 @@
 import commandLineArgs, { OptionDefinition } from "command-line-args"
 import { NextFunction } from "connect"
 import express, { Request, Response, Application } from "express"
-import { Server } from "http";
+import { Server } from "http"
 import { Container } from "inversify"
+import { serve as serveSwaggerUi, setup as setupSwaggerUi } from "swagger-ui-express"
 
 import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig  } from "typescript-lambda-api"
 
@@ -46,6 +47,17 @@ export class ApiConsoleApp extends ApiApp {
         let options = this.parseArguments(args)
 
         await super.initialiseControllers()
+
+        if (this.appConfig.openApi.enabled) {
+            let specUrl =
+                `http://${options.host}:${options.port}${this.appConfig.base || ""}/open-api.json`
+
+            this.expressApp.use(
+                `${this.appConfig.base || ""}/swagger`,
+                serveSwaggerUi,
+                setupSwaggerUi(null, { swaggerUrl: specUrl })
+            )
+        }
 
         this.expressApp.all(
             "*",
