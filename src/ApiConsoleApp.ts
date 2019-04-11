@@ -17,8 +17,8 @@ import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig  } from "typescript-l
  */
 export class ApiConsoleApp extends ApiApp {
     private static readonly APP_OPTIONS: OptionDefinition[] = [
-        { name: 'port', alias: 'p', type: Number, defaultValue: 5555 },
-        { name: 'host', alias: 'h', type: String, defaultValue: "127.0.0.1" }
+        { name: "port", alias: "p", type: Number, defaultValue: 5555 },
+        { name: "host", alias: "h", type: String, defaultValue: "127.0.0.1" }
     ]
 
     protected readonly expressApp: Application
@@ -135,7 +135,7 @@ export class ApiConsoleApp extends ApiApp {
         let body: any = apiResponse.body
 
         if (apiResponse.isBase64Encoded) {
-            body = Buffer.from(body, 'base64')
+            body = Buffer.from(body, "base64")
         }
 
         response.send(body)
