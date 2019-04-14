@@ -10,12 +10,12 @@ import { HttpClient } from "typed-rest-client/HttpClient"
 import { ApiConsoleApp } from "../../dist/typescript-lambda-api-local"
 
 import { Message } from "./test-controllers/Message"
-import { TestAuthFilter } from './test-components/TestAuthFiler';
+import { TestAuthFilter } from "./test-components/TestAuthFilter"
 import { AppConfig } from "typescript-lambda-api";
 
 @TestFixture()
 export class ConsoleAcceptanceTests {
-    private static readonly BASE_URL = "http://localhost:5555"
+    private static readonly BASE_URL = "http://localhost:8080"
     private static readonly TEST_FILE_SIZE = 19605
 
     private appArgs: string[]

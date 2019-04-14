@@ -1,5 +1,6 @@
 import commandLineArgs, { OptionDefinition } from "command-line-args"
 import { NextFunction } from "connect"
+import cors from "cors"
 import express, { Request, Response, Application } from "express"
 import { Server } from "http"
 import { Container } from "inversify"
@@ -18,8 +19,9 @@ import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig  } from "typescript-l
  */
 export class ApiConsoleApp extends ApiApp {
     private static readonly APP_OPTIONS: OptionDefinition[] = [
-        { name: "port", alias: "p", type: Number, defaultValue: 5555 },
-        { name: "host", alias: "h", type: String, defaultValue: "127.0.0.1" }
+        { name: "port", alias: "p", type: Number, defaultValue: 8080 },
+        { name: "host", alias: "h", type: String, defaultValue: "*" },
+        { name: "cors-origin", alias: "c", type: String, defaultValue: "*" }
     ]
 
     protected readonly expressApp: Application
@@ -45,18 +47,17 @@ export class ApiConsoleApp extends ApiApp {
     public async runServer(args: string[]) {
         let self = this
         let options = this.parseArguments(args)
+        let listenOnAllHosts = options.host === "*"
+        let baseUrl = `http://${options.host}:${options.port}`
 
         await super.initialiseControllers()
 
-        if (this.appConfig.openApi.enabled) {
-            let specUrl =
-                `http://${options.host}:${options.port}${this.appConfig.base || ""}/open-api.json`
+        this.expressApp.use(cors({
+            origin: options["cors-origin"]
+        }))
 
-            this.expressApp.use(
-                `${this.appConfig.base || ""}/swagger`,
-                serveSwaggerUi,
-                setupSwaggerUi(null, { swaggerUrl: specUrl })
-            )
+        if (this.appConfig.openApi.enabled) {
+            this.configureSwaggerUi()
         }
 
         this.expressApp.all(
@@ -66,15 +67,36 @@ export class ApiConsoleApp extends ApiApp {
 
         this.server = await new Promise<Server> ((resolve, reject) => {
             try {
-                let server = this.expressApp.listen(options.port, options.host,
-                    () => resolve(server))
+                if (listenOnAllHosts) {
+                    let server = this.expressApp.listen(options.port, () => resolve(server))
+                } else {
+                    let server = this.expressApp.listen(
+                        options.port,
+                        options.host,
+                        () => resolve(server)
+                    )
+                }
             } catch (ex) {
                 reject(ex)
             }
         })
 
         console.log(
-            `App is now listening for HTTP requests on http://${options.host}:${options.port} ...`
+            `App is now listening for HTTP requests on ${baseUrl} ...`
+        )
+    }
+
+    private configureSwaggerUi() {
+        let basePath = this.appConfig.base || ""
+        let specUrl = `${basePath}/open-api.json`
+
+        this.expressApp.use(
+            `${basePath}/swagger`,
+            serveSwaggerUi,
+            setupSwaggerUi(null, {
+                explorer : true,
+                swaggerUrl: specUrl
+            })
         )
     }
 
