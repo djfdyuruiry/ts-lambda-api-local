@@ -2,7 +2,7 @@
 
 Extension module for the `typescript-lambda-api` package which enables running lambda REST API's locally using express.
 
-This module also provides a built in swagger-ui, powered by the `swagger-ui-express` npm package.
+This module also provides Swagger UI support, powered by the `swagger-ui-express` npm package.
 
 ---
 
@@ -85,7 +85,7 @@ let app = new ApiConsoleApp(path.join(__dirname, "controllers"))
 app.runServer(process.argv)
 ```
 
-Then, the Swagger UI interface will be available @ [http:\\\localhost:8080\api\v1\swagger](http:\\localhost:8080\api\v1\swagger)
+Then, the Swagger UI interface will be available @ http://localhost:8080/api/v1/swagger
 
 ----
 
