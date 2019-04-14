@@ -10,21 +10,28 @@ import { HttpClient } from "typed-rest-client/HttpClient"
 import { ApiConsoleApp } from "../../dist/typescript-lambda-api-local"
 
 import { Message } from "./test-controllers/Message"
-import { TestAuthFilter } from './test-components/TestAuthFiler';
+import { TestAuthFilter } from "./test-components/TestAuthFilter"
+import { AppConfig } from "typescript-lambda-api";
 
 @TestFixture()
 export class ConsoleAcceptanceTests {
-    private static readonly BASE_URL = "http://localhost:5555"
+    private static readonly BASE_URL = "http://localhost:8080"
     private static readonly TEST_FILE_SIZE = 19605
 
     private appArgs: string[]
     private app: ApiConsoleApp
+    private appConfig: AppConfig
     private restClient: RestClient
     private httpClient: HttpClient
 
     @AsyncSetup
     public async setup() {
-        this.restClient = new RestClient("alsatian tests", ConsoleAcceptanceTests.BASE_URL)
+        this.restClient = new RestClient(
+            "alsatian tests",
+            ConsoleAcceptanceTests.BASE_URL,
+            null,
+            { allowRedirects: false }
+        )
         this.httpClient = this.restClient.client
 
         this.appArgs = []
@@ -130,13 +137,30 @@ export class ConsoleAcceptanceTests {
         Expect(response.message.statusCode).toBe(200)
     }
 
+    @AsyncTest()
+    public async when_openapi_is_enabled_then_app_serves_swagger_ui() {
+        this.appConfig = new AppConfig()
+        this.appConfig.openApi.enabled = true
+
+        await this.buildApp()
+
+        let swaggerUrl = `${ConsoleAcceptanceTests.BASE_URL}/swagger/`
+
+        let response = await this.httpClient.get(swaggerUrl)
+        let responseBody = await response.readBody()
+
+        Expect(response.message.statusCode).toBe(200)
+        Expect(responseBody).toContain(`<div id="swagger-ui"></div>`)
+    }
+
     private async buildApp(configBlock?: (app: ApiConsoleApp) => void) {
         if (this.app) {
             await this.app.stopServer()
         }
 
         this.app = new ApiConsoleApp(
-            path.join(__dirname, "test-controllers")
+            path.join(__dirname, "test-controllers"),
+            this.appConfig
         )
 
         if (configBlock) {

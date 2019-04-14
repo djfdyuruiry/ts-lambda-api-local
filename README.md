@@ -2,6 +2,8 @@
 
 Extension module for the `typescript-lambda-api` package which enables running lambda REST API's locally using express.
 
+This module also provides Swagger UI support, powered by the `swagger-ui-express` npm package.
+
 ---
 
 ## Getting Started
@@ -35,8 +37,20 @@ app.runServer(process.argv)
 - You can now call your API locally:
 
 ```
-wget -qO - http://localhost:5555/api/v1/some-controller/
+wget -qO - http://localhost:8080/api/v1/some-controller/
 ```
+
+----
+
+# Command Line Arguments
+
+----
+
+`ApiConsoleApp` supports several optional command line parameters.
+
+- `-p` or `--port`: Port to listen on, defaults to `8080`
+- `-h` or `--host`: Host to accept requests on, defaults to `*` (any hostname/ip)
+- `-c` or `--cors-origin`: CORS origins to allow, defaults to `*` (any origin)
 
 ----
 
@@ -45,6 +59,33 @@ wget -qO - http://localhost:5555/api/v1/some-controller/
 ----
 
 Both the `configureApp` and `configureApi` methods documented in `typescript-lambda-api` are available in the `ApiConsoleApp` class.
+
+----
+
+# Swagger UI
+
+----
+
+To enable the Swagger UI page, simply enable open-api in your application config. The interface will then be available from the `/swagger` endpoint. For example, if you configured your app like below:
+
+```typescript
+import * as path from "path"
+
+import { AppConfig } from "typescript-lambda-api"
+import { ApiConsoleApp } from "typescript-lambda-api-local"
+
+let appConfig = new AppConfig()
+
+appConfig.base = "/api/v1"
+appConfig.version = "v1"
+appConfig.openApi.enabled = true
+
+let app = new ApiConsoleApp(path.join(__dirname, "controllers"))
+
+app.runServer(process.argv)
+```
+
+Then, the Swagger UI interface will be available @ http://localhost:8080/api/v1/swagger
 
 ----
 
