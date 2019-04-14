@@ -43,7 +43,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "swagger-ui-express": "^4.0.2",
-    "typescript-lambda-api": "^0.3.2"
+    "typescript-lambda-api": "^0.3.3"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
