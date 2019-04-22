@@ -1,7 +1,7 @@
 {
   "name": "typescript-lambda-api-local",
   "description": "Test typescript-lambda-api API's locally using express.",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/typescript-lambda-api-local.git"
@@ -45,7 +45,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "swagger-ui-express": "^4.0.2",
-    "typescript-lambda-api": "^0.4.2"
+    "typescript-lambda-api": "^0.4.3"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",

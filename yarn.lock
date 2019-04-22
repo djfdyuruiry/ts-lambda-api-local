@@ -2125,10 +2125,10 @@ typedoc@^0.14.2:
     typedoc-default-themes "^0.5.0"
     typescript "3.2.x"
 
-typescript-lambda-api@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/typescript-lambda-api/-/typescript-lambda-api-0.4.2.tgz#7b9284825e7466cb0b9a5788fff34c2831df38e9"
-  integrity sha512-OjlHWmK+oXHbQ7hIqmRtLG/7VHDrtQybNb1jS8K4hlYus/dtTKMGlirfhwkcHEcRTld9tVCf4eDFu+9MuGJ6jg==
+typescript-lambda-api@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/typescript-lambda-api/-/typescript-lambda-api-0.4.3.tgz#ebbc1a30f9c230043e6483651afc5fe9a94a247f"
+  integrity sha512-q2RakF2j0DeS8j89hyJs7F84CpGJyIPLoJluKnv8f6IxH+MxzqGFrQNvIcPOiKGu0U1012iHbylufCG+X+aHKQ==
   dependencies:
     "@types/aws-lambda" "^8.10.19"
     fast-json-patch "^2.0.7"
