@@ -1,13 +1,13 @@
-# typescript-lambda-api-local
+# ts-lambda-api-local
 
-Extension module for the `typescript-lambda-api` package which enables running lambda REST API's locally using express.
+Extension module for the `ts-lambda-api` package which enables running lambda REST API's locally using express.
 
 This module also provides Swagger UI support, powered by the `swagger-ui-express` npm package.
 
-[NPM Package](https://www.npmjs.com/package/typescript-lambda-api-local)
-[GitHub Repo](https://github.com/djfdyuruiry/typescript-lambda-api-local/)
+[NPM Package](https://www.npmjs.com/package/ts-lambda-api-local)
+[GitHub Repo](https://github.com/djfdyuruiry/ts-lambda-api-local/)
 
-Read the full `typedoc` documentation: https://djfdyuruiry.github.io/typescript-lambda-api-local/
+Read the full `typedoc` documentation: https://djfdyuruiry.github.io/ts-lambda-api-local/
 
 ---
 
@@ -15,12 +15,12 @@ Read the full `typedoc` documentation: https://djfdyuruiry.github.io/typescript-
 
 ---
 
-**Note: These steps modify an existing `typescript-lambda-api` app. If you don't have one, see the package documentation.**
+**Note: These steps modify an existing `ts-lambda-api` app. If you don't have one, see the package documentation.**
 
 - Install this package and types for Node.js as dev dependencies:
 
 ```shell
-npm install -D typescript-lambda-api-local
+npm install -D ts-lambda-api-local
 npm install -D @types/node
 ```
 
@@ -29,7 +29,7 @@ npm install -D @types/node
 ```typescript
 import * as path from "path"
 
-import { ApiConsoleApp } from "typescript-lambda-api-local"
+import { ApiConsoleApp } from "ts-lambda-api-local"
 
 // if you use a different directory, point to it here instead of 'controllers'
 let app = new ApiConsoleApp(path.join(__dirname, "controllers"))
@@ -63,7 +63,7 @@ wget -qO - http://localhost:8080/api/v1/some-controller/
 
 ----
 
-Both the `configureApp` and `configureApi` methods documented in `typescript-lambda-api` are available in the `ApiConsoleApp` class.
+Both the `configureApp` and `configureApi` methods documented in `ts-lambda-api` are available in the `ApiConsoleApp` class.
 
 ----
 
@@ -76,8 +76,8 @@ To enable the Swagger UI page, simply enable open-api in your application config
 ```typescript
 import * as path from "path"
 
-import { AppConfig } from "typescript-lambda-api"
-import { ApiConsoleApp } from "typescript-lambda-api-local"
+import { AppConfig } from "ts-lambda-api"
+import { ApiConsoleApp } from "ts-lambda-api-local"
 
 let appConfig = new AppConfig()
 

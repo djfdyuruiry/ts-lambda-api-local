@@ -2,7 +2,7 @@ import * as path from "path"
 
 import { injectable } from "inversify";
 import { Response } from "lambda-api";
-import { fromBody, queryParam, response, GET, POST  } from "typescript-lambda-api";
+import { fromBody, queryParam, response, GET, POST  } from "ts-lambda-api";
 
 import { Message } from "./Message";
 

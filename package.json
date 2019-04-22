@@ -1,10 +1,10 @@
 {
-  "name": "typescript-lambda-api-local",
-  "description": "Test typescript-lambda-api API's locally using express.",
+  "name": "ts-lambda-api-local",
+  "description": "Test ts-lambda-api API's locally using express.",
   "version": "0.4.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/djfdyuruiry/typescript-lambda-api-local.git"
+    "url": "https://github.com/djfdyuruiry/ts-lambda-api-local.git"
   },
   "scripts": {
     "build": "yarn run lint && rm -rf dist && tsc && yarn docs",
@@ -18,8 +18,8 @@
     "test": "yarn run build-all && scripts/runTests.sh",
     "test-app": "yarn build-all && node ./tests/js/test-components/TestApp.js"
   },
-  "main": "dist/typescript-lambda-api-local.js",
-  "typings": "dist/typescript-lambda-api-local.d.ts",
+  "main": "dist/ts-lambda-api-local.js",
+  "typings": "dist/ts-lambda-api-local.d.ts",
   "author": "Matthew Snoddy",
   "license": "MIT",
   "files": [
@@ -45,7 +45,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "swagger-ui-express": "^4.0.2",
-    "typescript-lambda-api": "^0.4.3"
+    "ts-lambda-api": "^0.4.3"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",

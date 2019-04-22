@@ -1,8 +1,8 @@
 import * as path from "path"
 
-import { AppConfig, LogLevel } from "typescript-lambda-api"
+import { AppConfig, LogLevel } from "ts-lambda-api"
 
-import { ApiConsoleApp } from "../../../dist/typescript-lambda-api-local"
+import { ApiConsoleApp } from "../../../dist/ts-lambda-api-local"
 
 let appConfig = new AppConfig()
 

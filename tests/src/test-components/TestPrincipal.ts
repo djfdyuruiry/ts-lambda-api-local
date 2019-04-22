@@ -1,4 +1,4 @@
-import { Principal } from "typescript-lambda-api"
+import { Principal } from "ts-lambda-api"
 
 export class TestPrincipal extends Principal {
     public constructor() {

@@ -2031,6 +2031,20 @@ trim@0.0.1:
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
   integrity sha1-WFhUf2spB1fulczMZm+1AITEYN0=
 
+ts-lambda-api@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-0.4.3.tgz#f93ab5abdfc31960a44869178fac592271c48f17"
+  integrity sha512-qmP0RDVjN50QzlKOluxqx/pLabQSAdsa6clekaxM+adkOWpahwc9wesQNm2CQTQxLxqAFn5lUBjoPBVm+OiG0g==
+  dependencies:
+    "@types/aws-lambda" "^8.10.19"
+    fast-json-patch "^2.0.7"
+    inversify "^5.0.1"
+    lambda-api "^0.10.1"
+    marky "^1.2.1"
+    openapi3-ts "^1.2.0"
+    reflect-metadata "^0.1.13"
+    sprintf-js "^1.1.2"
+
 ts-node@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-7.0.1.tgz#9562dc2d1e6d248d24bc55f773e3f614337d9baf"
@@ -2124,20 +2138,6 @@ typedoc@^0.14.2:
     shelljs "^0.8.2"
     typedoc-default-themes "^0.5.0"
     typescript "3.2.x"
-
-typescript-lambda-api@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/typescript-lambda-api/-/typescript-lambda-api-0.4.3.tgz#ebbc1a30f9c230043e6483651afc5fe9a94a247f"
-  integrity sha512-q2RakF2j0DeS8j89hyJs7F84CpGJyIPLoJluKnv8f6IxH+MxzqGFrQNvIcPOiKGu0U1012iHbylufCG+X+aHKQ==
-  dependencies:
-    "@types/aws-lambda" "^8.10.19"
-    fast-json-patch "^2.0.7"
-    inversify "^5.0.1"
-    lambda-api "^0.10.1"
-    marky "^1.2.1"
-    openapi3-ts "^1.2.0"
-    reflect-metadata "^0.1.13"
-    sprintf-js "^1.1.2"
 
 typescript@3.2.x:
   version "3.2.4"
