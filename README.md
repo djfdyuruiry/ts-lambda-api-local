@@ -4,6 +4,11 @@ Extension module for the `typescript-lambda-api` package which enables running l
 
 This module also provides Swagger UI support, powered by the `swagger-ui-express` npm package.
 
+[NPM Package](https://www.npmjs.com/package/typescript-lambda-api-local)
+[GitHub Repo](https://github.com/djfdyuruiry/typescript-lambda-api-local/)
+
+Read the full `typedoc` documentation: https://djfdyuruiry.github.io/typescript-lambda-api-local/
+
 ---
 
 ## Getting Started
