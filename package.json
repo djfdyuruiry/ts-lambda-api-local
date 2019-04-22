@@ -1,18 +1,20 @@
 {
   "name": "typescript-lambda-api-local",
-  "description": "Test typescript AWS Lambda API's locally using express.",
-  "version": "0.4.1",
+  "description": "Test typescript-lambda-api API's locally using express.",
+  "version": "0.4.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/typescript-lambda-api-local.git"
   },
   "scripts": {
-    "build": "yarn run lint && rm -rf dist && tsc",
+    "build": "yarn run lint && rm -rf dist && tsc && yarn docs",
     "build-all": "yarn run install-with-audit && yarn run build && yarn run build-tests",
     "build-tests": "rm -rf ./tests/js && tsc -p ./tests",
-    "clean-install": "rm -rf node_modules && yarn install",
-    "install-with-audit": "yarn install && yarn audit",
+    "docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --out ./docs",
+    "clean-install": "rm -rf node_modules && yarn install-with-audit",
+    "install-with-audit": "yarn install --audit && yarn audit",
     "lint": "tslint 'src/**/*.ts'",
+    "shell": "bash",
     "test": "yarn run build-all && scripts/runTests.sh",
     "test-app": "yarn build-all && node ./tests/js/test-components/TestApp.js"
   },
@@ -43,7 +45,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "swagger-ui-express": "^4.0.2",
-    "typescript-lambda-api": "^0.3.3"
+    "typescript-lambda-api": "^0.4.2"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
@@ -53,12 +55,14 @@
     "@types/swagger-ui-express": "^3.0.0",
     "@types/temp": "^0.8.33",
     "alsatian": "^2.3.0",
+    "junit-bark": "^1.1.1",
+    "marked": "^0.6.2",
     "nyc": "^13.3.0",
-    "tap-junit": "^3.0.2",
+    "tap-spec": "^5.0.0",
     "temp": "^0.9.0",
     "tslint": "^5.13.0",
     "typed-rest-client": "^1.1.2",
-    "typescript": "^3.3.3",
-    "xunit-viewer": "^5.1.8"
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3"
   }
 }
