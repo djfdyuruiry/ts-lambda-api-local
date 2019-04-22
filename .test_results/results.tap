@@ -1,0 +1,88 @@
+TAP version 13
+1..10
+# FIXTURE ConsoleAcceptanceTests
+2019-04-22T16:02:31.553Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.587Z INFO Server - Processing API request event for path: /
+2019-04-22T16:02:31.591Z INFO Endpoint - [GET] / - Invoking endpoint
+2019-04-22T16:02:31.595Z INFO Endpoint - [GET] / - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.604Z INFO ApiConsoleApp - Server shutting down
+ok 1 when_valid_http_get_request_sent_then_app_returns_response_body_and_200_ok
+2019-04-22T16:02:31.605Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.607Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.617Z INFO Server - Processing API request event for path: /echo
+2019-04-22T16:02:31.617Z INFO Endpoint - [POST] /echo - Invoking endpoint
+2019-04-22T16:02:31.618Z INFO Endpoint - [POST] /echo - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.626Z INFO ApiConsoleApp - Server shutting down
+ok 2 when_valid_http_post_request_sent_then_app_returns_response_body_and_201_created
+2019-04-22T16:02:31.626Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.627Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.630Z INFO Server - Processing API request event for path: /binary
+2019-04-22T16:02:31.630Z INFO Endpoint - [GET] /binary - Invoking endpoint
+2019-04-22T16:02:31.632Z INFO Endpoint - [GET] /binary - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.636Z INFO ApiConsoleApp - Server shutting down
+ok 3 when_valid_http_get_request_sent_then_app_returns_binary_response_body_and_200_ok
+2019-04-22T16:02:31.636Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.637Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.641Z INFO Server - Processing API request event for path: /query
+2019-04-22T16:02:31.641Z INFO Endpoint - [GET] /query - Invoking endpoint
+2019-04-22T16:02:31.642Z INFO Endpoint - [GET] /query - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.644Z INFO ApiConsoleApp - Server shutting down
+ok 4 when_valid_http_get_request_with_query_param_sent_then_app_passes_param_to_endpoint
+2019-04-22T16:02:31.644Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.645Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.645Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.648Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.653Z INFO Server - Processing API request event for path: /
+2019-04-22T16:02:31.653Z INFO Endpoint - [GET] / - Authenticating request
+2019-04-22T16:02:31.653Z INFO Endpoint - [GET] / - Authenticated request principal 'dummy' using authentication filter: TestAuthFilter
+2019-04-22T16:02:31.654Z INFO Endpoint - [GET] / - Invoking endpoint
+2019-04-22T16:02:31.654Z INFO Endpoint - [GET] / - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.655Z INFO ApiConsoleApp - Server shutting down
+ok 5 when_app_has_basic_auth_configured_and_request_received_with_correct_credentials_then_app_returns_200_ok
+2019-04-22T16:02:31.655Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.657Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.657Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.659Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.662Z INFO Server - Processing API request event for path: /
+2019-04-22T16:02:31.663Z INFO Endpoint - [GET] / - Authenticating request
+2019-04-22T16:02:31.663Z INFO Endpoint - [GET] / - Request not authenticated, returning 'WWW-Authenticate' header in response with scheme: Basic
+2019-04-22T16:02:31.664Z INFO Endpoint - [GET] / - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.667Z INFO ApiConsoleApp - Server shutting down
+ok 6 when_app_has_basic_auth_configured_and_request_received_with_incorrect_credentials_then_app_returns_401_unauthorized
+2019-04-22T16:02:31.667Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.668Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.669Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.669Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.671Z INFO Server - Processing API request event for path: /
+2019-04-22T16:02:31.671Z INFO Endpoint - [GET] / - Authenticating request
+2019-04-22T16:02:31.671Z INFO Endpoint - [GET] / - No auth data returned by authentication filter: TestAuthFilter
+2019-04-22T16:02:31.671Z INFO Endpoint - [GET] / - Request not authenticated, returning 'WWW-Authenticate' header in response with scheme: Basic
+2019-04-22T16:02:31.671Z INFO Endpoint - [GET] / - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.672Z INFO ApiConsoleApp - Server shutting down
+ok 7 when_app_has_basic_auth_configured_and_request_received_without_credentials_then_app_returns_401_unauthorized
+2019-04-22T16:02:31.672Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.673Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.673Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.674Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:3669 ...
+2019-04-22T16:02:31.675Z INFO Server - Processing API request event for path: /
+2019-04-22T16:02:31.675Z INFO Endpoint - [GET] / - Invoking endpoint
+2019-04-22T16:02:31.675Z INFO Endpoint - [GET] / - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.676Z INFO ApiConsoleApp - Server shutting down
+ok 8 when_port_set_in_app_args_then_app_listens_on_given_port ( "--port" )
+2019-04-22T16:02:31.677Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.678Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.678Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.680Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:3669 ...
+2019-04-22T16:02:31.683Z INFO Server - Processing API request event for path: /
+2019-04-22T16:02:31.684Z INFO Endpoint - [GET] / - Invoking endpoint
+2019-04-22T16:02:31.684Z INFO Endpoint - [GET] / - Endpoint invoked successfully, returning response
+2019-04-22T16:02:31.685Z INFO ApiConsoleApp - Server shutting down
+ok 9 when_port_set_in_app_args_then_app_listens_on_given_port ( "-p" )
+2019-04-22T16:02:31.686Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.687Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.687Z INFO ApiConsoleApp - Server shutting down
+2019-04-22T16:02:31.688Z INFO Server - Registering OpenAPI endpoints
+2019-04-22T16:02:31.689Z INFO ApiConsoleApp - OpenAPI enabled, configuring SwaggerUI to be available @ http://*:8080/swagger
+2019-04-22T16:02:31.690Z INFO ApiConsoleApp - Listening for HTTP requests on http://*:8080 ...
+2019-04-22T16:02:31.694Z INFO ApiConsoleApp - Server shutting down
+ok 10 when_openapi_is_enabled_then_app_serves_swagger_ui

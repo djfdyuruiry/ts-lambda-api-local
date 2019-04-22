@@ -31,6 +31,7 @@ export class ApiConsoleApp extends ApiApp {
     public constructor(controllersPath: string, appConfig?: AppConfig, appContainer?: Container) {
         super(controllersPath, appConfig, appContainer)
 
+        this.logger = this.logFactory.getLogger(ApiConsoleApp)
         this.expressApp = express()
     }
 
@@ -50,14 +51,18 @@ export class ApiConsoleApp extends ApiApp {
         let listenOnAllHosts = options.host === "*"
         let baseUrl = `http://${options.host}:${options.port}`
 
+        this.logger.debug("Server base URL: %s", baseUrl)
+
         await super.initialiseControllers()
+
+        this.logger.debug("CORS origin set to: %s", options["cors-origin"])
 
         this.expressApp.use(cors({
             origin: options["cors-origin"]
         }))
 
         if (this.appConfig.openApi.enabled) {
-            this.configureSwaggerUi()
+            this.configureSwaggerUi(baseUrl)
         }
 
         this.expressApp.all(
@@ -68,8 +73,12 @@ export class ApiConsoleApp extends ApiApp {
         this.server = await new Promise<Server> ((resolve, reject) => {
             try {
                 if (listenOnAllHosts) {
+                    this.logger.debug("Listening on all hosts")
+
                     let server = this.expressApp.listen(options.port, () => resolve(server))
                 } else {
+                    this.logger.debug("Listening on host: %s", options.host)
+
                     let server = this.expressApp.listen(
                         options.port,
                         options.host,
@@ -81,17 +90,19 @@ export class ApiConsoleApp extends ApiApp {
             }
         })
 
-        console.log(
-            `App is now listening for HTTP requests on ${baseUrl} ...`
-        )
+        this.logger.info(`Listening for HTTP requests on ${baseUrl} ...`)
     }
 
-    private configureSwaggerUi() {
+    private configureSwaggerUi(baseUrl: string) {
         let basePath = this.appConfig.base || ""
         let specUrl = `${basePath}/open-api.json`
+        let swaggerUiUrl = `${basePath}/swagger`
+
+        this.logger.info("OpenAPI enabled, configuring SwaggerUI to be available @ %s%s",
+            baseUrl, swaggerUiUrl)
 
         this.expressApp.use(
-            `${basePath}/swagger`,
+            swaggerUiUrl,
             serveSwaggerUi,
             setupSwaggerUi(null, {
                 explorer : true,
@@ -105,6 +116,8 @@ export class ApiConsoleApp extends ApiApp {
             throw new Error("stopServer can only be called after runServer has been called and has completed")
         }
 
+        this.logger.info("Server shutting down")
+
         await new Promise<void>((resolve, reject) => {
             try {
                 this.server.close(() => resolve())
@@ -115,6 +128,8 @@ export class ApiConsoleApp extends ApiApp {
     }
 
     private parseArguments(args: string[]) {
+        this.logger.trace("Command line arguments: %s", args)
+
         return commandLineArgs(ApiConsoleApp.APP_OPTIONS, {
             argv: args
         })
@@ -123,6 +138,8 @@ export class ApiConsoleApp extends ApiApp {
     @timed
     private async handleHttpRequest(self: ApiConsoleApp, request: Request, response: Response, onError: NextFunction) {
         try {
+            this.logger.debug("Mapping express request to AWS model")
+
             let apiRequestEvent = await self.mapRequestToApiEvent(request)
             let apiResponse = await self.run(apiRequestEvent, {})
 
@@ -145,6 +162,8 @@ export class ApiConsoleApp extends ApiApp {
 
         // read request body (if any) as a base 64 string
         return await new Promise<ApiRequest>((resolve, reject) => {
+            this.logger.debug("Reading request body as base64 string")
+
             let body = ""
 
             request.setEncoding("base64")
@@ -161,6 +180,8 @@ export class ApiConsoleApp extends ApiApp {
     }
 
     private forwardApiResponse(apiResponse: ApiResponse, response: Response) {
+        this.logger.debug("Mapping AWS response model to express response")
+
         let headers = apiResponse.headers
 
         response.status(apiResponse.statusCode)

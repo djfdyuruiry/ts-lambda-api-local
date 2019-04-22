@@ -1,12 +1,13 @@
 import * as path from "path"
 
-import { AppConfig } from "typescript-lambda-api"
+import { AppConfig, LogLevel } from "typescript-lambda-api"
 
 import { ApiConsoleApp } from "../../../dist/typescript-lambda-api-local"
 
 let appConfig = new AppConfig()
 
 appConfig.openApi.enabled = true
+appConfig.serverLogger.level = LogLevel.trace
 
 let app = new ApiConsoleApp(
     path.join(__dirname, "../test-controllers"),
