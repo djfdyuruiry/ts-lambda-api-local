@@ -7,11 +7,11 @@ import { RestClient } from "typed-rest-client"
 import { BasicCredentialHandler } from "typed-rest-client/Handlers"
 import { HttpClient } from "typed-rest-client/HttpClient"
 
-import { ApiConsoleApp } from "../../dist/typescript-lambda-api-local"
+import { ApiConsoleApp } from "../../dist/ts-lambda-api-local"
 
 import { Message } from "./test-controllers/Message"
 import { TestAuthFilter } from "./test-components/TestAuthFilter"
-import { AppConfig } from "typescript-lambda-api";
+import { AppConfig } from "ts-lambda-api";
 
 @TestFixture()
 export class ConsoleAcceptanceTests {

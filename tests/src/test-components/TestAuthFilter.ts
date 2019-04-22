@@ -1,4 +1,4 @@
-import { BasicAuth, BasicAuthFilter } from "typescript-lambda-api"
+import { BasicAuth, BasicAuthFilter } from "ts-lambda-api"
 import { TestPrincipal } from './TestPrincipal';
 
 export class TestAuthFilter extends BasicAuthFilter<TestPrincipal> {

@@ -1,5 +1,4 @@
 
 *****************************************
-    typescript-lambda-api-local tests    
+    ts-lambda-api-local tests
 *****************************************
-

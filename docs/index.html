@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>typescript-lambda-api-local</title>
+	<title>ts-lambda-api-local</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">typescript-lambda-api-local</a>
+					<a href="index.html" class="title">ts-lambda-api-local</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> typescript-lambda-api-local</h1>
+			<h1> ts-lambda-api-local</h1>
 		</div>
 	</div>
 </header>
@@ -64,27 +64,27 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="typescript-lambda-api-local">typescript-lambda-api-local</h1>
-				<p>Extension module for the <code>typescript-lambda-api</code> package which enables running lambda REST API&#39;s locally using express.</p>
+				<h1 id="ts-lambda-api-local">ts-lambda-api-local</h1>
+				<p>Extension module for the <code>ts-lambda-api</code> package which enables running lambda REST API&#39;s locally using express.</p>
 				<p>This module also provides Swagger UI support, powered by the <code>swagger-ui-express</code> npm package.</p>
-				<p><a href="https://www.npmjs.com/package/typescript-lambda-api-local">NPM Package</a>
-				<a href="https://github.com/djfdyuruiry/typescript-lambda-api-local/">GitHub Repo</a></p>
-				<p>Read the full <code>typedoc</code> documentation: <a href="https://djfdyuruiry.github.io/typescript-lambda-api-local/">https://djfdyuruiry.github.io/typescript-lambda-api-local/</a></p>
+				<p><a href="https://www.npmjs.com/package/ts-lambda-api-local">NPM Package</a>
+				<a href="https://github.com/djfdyuruiry/ts-lambda-api-local/">GitHub Repo</a></p>
+				<p>Read the full <code>typedoc</code> documentation: <a href="https://djfdyuruiry.github.io/ts-lambda-api-local/">https://djfdyuruiry.github.io/ts-lambda-api-local/</a></p>
 				<hr>
 				<h2 id="getting-started">Getting Started</h2>
 				<hr>
-				<p><strong>Note: These steps modify an existing <code>typescript-lambda-api</code> app. If you don&#39;t have one, see the package documentation.</strong></p>
+				<p><strong>Note: These steps modify an existing <code>ts-lambda-api</code> app. If you don&#39;t have one, see the package documentation.</strong></p>
 				<ul>
 					<li>Install this package and types for Node.js as dev dependencies:</li>
 				</ul>
-				<pre><code class="language-shell">npm install -D typescript-lambda-api-local
+				<pre><code class="language-shell">npm install -D ts-lambda-api-local
 npm install -D @types/node</code></pre>
 				<ul>
 					<li>Create a new typescript file, add the following:</li>
 				</ul>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">"path"</span>
 
-<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">"typescript-lambda-api-local"</span>
+<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">"ts-lambda-api-local"</span>
 
 <span class="hljs-comment">// if you use a different directory, point to it here instead of 'controllers'</span>
 <span class="hljs-keyword">let</span> app = <span class="hljs-keyword">new</span> ApiConsoleApp(path.join(__dirname, <span class="hljs-string">"controllers"</span>))
@@ -108,15 +108,15 @@ app.runServer(process.argv)</code></pre>
 				<hr>
 				<h1 id="configuration">Configuration</h1>
 				<hr>
-				<p>Both the <code>configureApp</code> and <code>configureApi</code> methods documented in <code>typescript-lambda-api</code> are available in the <code>ApiConsoleApp</code> class.</p>
+				<p>Both the <code>configureApp</code> and <code>configureApi</code> methods documented in <code>ts-lambda-api</code> are available in the <code>ApiConsoleApp</code> class.</p>
 				<hr>
 				<h1 id="swagger-ui">Swagger UI</h1>
 				<hr>
 				<p>To enable the Swagger UI page, simply enable open-api in your application config. The interface will then be available from the <code>/swagger</code> endpoint. For example, if you configured your app like below:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">"path"</span>
 
-<span class="hljs-keyword">import</span> { AppConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">"typescript-lambda-api"</span>
-<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">"typescript-lambda-api-local"</span>
+<span class="hljs-keyword">import</span> { AppConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">"ts-lambda-api"</span>
+<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">"ts-lambda-api-local"</span>
 
 <span class="hljs-keyword">let</span> appConfig = <span class="hljs-keyword">new</span> AppConfig()
 
