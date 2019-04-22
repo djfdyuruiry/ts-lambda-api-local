@@ -83,4 +83,4 @@ package-lock.json
 
 dist
 tests/js
-tests/results*
+.test_results
