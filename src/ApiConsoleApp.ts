@@ -187,12 +187,16 @@ export class ApiConsoleApp extends ApiApp {
         response.status(apiResponse.statusCode)
         Object.keys(headers).forEach(h => response.header(h, headers[h]))
 
-        let body: any = apiResponse.body
-
         if (apiResponse.isBase64Encoded) {
-            body = Buffer.from(body, "base64")
-        }
+            response.contentType(
+                apiResponse.headers["content-type"] || "application/octet-stream"
+            )
 
-        response.send(body)
+            response.end(
+                Buffer.from(apiResponse.body, "base64")
+            )
+        } else {
+            response.send(apiResponse.body)
+        }
     }
 }

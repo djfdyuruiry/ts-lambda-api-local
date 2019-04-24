@@ -1,7 +1,7 @@
 {
   "name": "ts-lambda-api-local",
   "description": "Test ts-lambda-api API's locally using express.",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/ts-lambda-api-local.git"
@@ -51,12 +51,14 @@
     "@types/command-line-args": "^5.0.0",
     "@types/cors": "^2.8.4",
     "@types/express": "^4.16.1",
-    "@types/node": "^11.9.4",
+    "@types/md5-file": "^4.0.0",
+    "@types/node": "^11.13.7",
     "@types/swagger-ui-express": "^3.0.0",
     "@types/temp": "^0.8.33",
     "alsatian": "^2.3.0",
     "junit-bark": "^1.1.1",
     "marked": "^0.6.2",
+    "md5-file": "^4.0.0",
     "nyc": "^13.3.0",
     "tap-spec": "^5.0.0",
     "temp": "^0.9.0",
