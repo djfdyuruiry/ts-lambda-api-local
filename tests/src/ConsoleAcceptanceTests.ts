@@ -57,12 +57,24 @@ export class ConsoleAcceptanceTests {
     }
 
     @AsyncTest()
-    public async when_valid_http_post_request_sent_then_app_returns_response_body_and_201_created() {
+    public async when_valid_http_post_json_request_sent_then_app_returns_response_body_and_201_created() {
         let message: Message = { text: "hello there" }
         let response = await this.restClient.create<Message>("/echo", message)
 
         Expect(response.statusCode).toBe(201)
         Expect(response.result).toEqual(message)
+    }
+
+    @AsyncTest()
+    public async when_valid_http_post_request_sent_then_app_returns_response_body_and_200_ok() {
+        let body = "I am the body of the POST request, so I am"
+        let response = await this.httpClient.post(
+            `${ConsoleAcceptanceTests.BASE_URL}/echo-body`,
+            body
+        )
+
+        Expect(response.message.statusCode).toEqual(200)
+        Expect(await response.readBody()).toEqual(body)
     }
 
     @AsyncTest()

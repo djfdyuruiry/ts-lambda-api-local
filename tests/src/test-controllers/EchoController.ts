@@ -31,6 +31,11 @@ export class EchoController extends Controller {
         return message
     }
 
+    @POST("/echo-body")
+    public echoBody(@fromBody message: any): Message {
+        return message
+    }
+
     @produces("application/octet-stream")
     @POST("/echo-binary-body")
     public echoBinaryBody(@header("content-type") contentType: string) {

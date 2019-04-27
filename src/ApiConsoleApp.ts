@@ -99,7 +99,7 @@ export class ApiConsoleApp extends ApiApp {
         // setup body parser to Base64 encode request's
         this.expressApp.use(rawBodyParser({
             limit: ApiConsoleApp.MAX_REQUEST_BODY_SIZE,
-            type: "*/*"
+            type: r => true
         }))
 
         this.logger.warn(
