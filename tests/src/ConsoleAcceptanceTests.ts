@@ -3,9 +3,11 @@ import * as path from "path"
 import * as temp from "temp"
 
 import { Expect, TestFixture, AsyncTest, AsyncSetup, AsyncTeardown, TestCase } from "alsatian"
+import { sync as calculateFileMd5Sync } from "md5-file"
 import { RestClient } from "typed-rest-client"
 import { BasicCredentialHandler } from "typed-rest-client/Handlers"
 import { HttpClient } from "typed-rest-client/HttpClient"
+import { IHttpClientResponse } from "typed-rest-client/Interfaces";
 
 import { ApiConsoleApp } from "../../dist/ts-lambda-api-local"
 
@@ -16,7 +18,9 @@ import { AppConfig } from "ts-lambda-api";
 @TestFixture()
 export class ConsoleAcceptanceTests {
     private static readonly BASE_URL = "http://localhost:8080"
+    private static readonly TEST_FILE_PATH = path.join(__dirname, "../test.pdf")
     private static readonly TEST_FILE_SIZE = 19605
+    private static readonly TEST_FILE_MD5 = "bb0cf6ccd0fe8e18e0a14e8028709abe"
 
     private appArgs: string[]
     private app: ApiConsoleApp
@@ -63,18 +67,45 @@ export class ConsoleAcceptanceTests {
 
     @AsyncTest()
     public async when_valid_http_get_request_sent_then_app_returns_binary_response_body_and_200_ok() {
-        let response = await this.httpClient.get(`${ConsoleAcceptanceTests.BASE_URL}/binary`)
-        let outputFile = temp.openSync()
+        let response: IHttpClientResponse
+        let testFileStream = fs.createReadStream(ConsoleAcceptanceTests.TEST_FILE_PATH)
 
-        response.message.pipe(
-            fs.createWriteStream(null, { fd: outputFile.fd })
+        try {
+            response = await this.httpClient.sendStream(
+                "POST",
+                `${ConsoleAcceptanceTests.BASE_URL}/echo-binary-body`,
+                testFileStream,
+                {
+                    "content-type": "application/pdf"
+                }
+            )
+        } finally {
+            testFileStream.close()
+        }
+
+        let outputFile = temp.openSync()
+        let outputStream = fs.createWriteStream(null, { fd: outputFile.fd })
+
+        try {
+            response.message.pipe(outputStream)
+            await new Promise(r => response.message.on("end", r))
+        } finally {
+            outputStream.close()
+        }
+
+        Expect(response.message.statusCode).toEqual(200)
+
+        Expect(
+            fs.statSync(outputFile.path).size
+        ).toBe(
+            ConsoleAcceptanceTests.TEST_FILE_SIZE
         )
 
-        await new Promise((res) => response.message.on("end", res))
-
-        let fileStat = fs.statSync(outputFile.path)
-
-        Expect(fileStat.size).toBe(ConsoleAcceptanceTests.TEST_FILE_SIZE)
+        Expect(
+            calculateFileMd5Sync(outputFile.path)
+        ).toBe(
+            ConsoleAcceptanceTests.TEST_FILE_MD5
+        )
     }
 
     @AsyncTest()

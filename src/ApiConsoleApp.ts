@@ -1,3 +1,4 @@
+import { raw as rawBodyParser } from "body-parser"
 import commandLineArgs, { OptionDefinition } from "command-line-args"
 import { NextFunction } from "connect"
 import cors from "cors"
@@ -18,6 +19,8 @@ import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig  } from "ts-lambda-ap
  * returned to the express client.
  */
 export class ApiConsoleApp extends ApiApp {
+    private static readonly MAX_REQUEST_BODY_SIZE = "1024kb"
+    private static readonly HTTP_METHODS_WITH_ENTITY = ["POST", "PUT", "PATCH"]
     private static readonly APP_OPTIONS: OptionDefinition[] = [
         { name: "port", alias: "p", type: Number, defaultValue: 8080 },
         { name: "host", alias: "h", type: String, defaultValue: "*" },
@@ -55,15 +58,7 @@ export class ApiConsoleApp extends ApiApp {
 
         await super.initialiseControllers()
 
-        this.logger.debug("CORS origin set to: %s", options["cors-origin"])
-
-        this.expressApp.use(cors({
-            origin: options["cors-origin"]
-        }))
-
-        if (this.appConfig.openApi.enabled) {
-            this.configureSwaggerUi(baseUrl)
-        }
+        this.configureServer(baseUrl, options)
 
         this.expressApp.all(
             "*",
@@ -91,6 +86,31 @@ export class ApiConsoleApp extends ApiApp {
         })
 
         this.logger.info(`Listening for HTTP requests on ${baseUrl} ...`)
+    }
+
+    private configureServer(baseUrl: string, options: any) {
+        // setup CORS
+        this.expressApp.use(cors({
+            origin: options["cors-origin"]
+        }))
+
+        this.logger.debug("CORS origin set to: %s", options["cors-origin"])
+
+        // setup body parser to Base64 encode request's
+        this.expressApp.use(rawBodyParser({
+            limit: ApiConsoleApp.MAX_REQUEST_BODY_SIZE,
+            type: "*/*"
+        }))
+
+        this.logger.warn(
+            "To simulate an AWS ALB or Application Gateway the max size for requests is limited to %s",
+            ApiConsoleApp.MAX_REQUEST_BODY_SIZE
+        )
+
+        // setup SwaggerUI
+        if (this.appConfig.openApi.enabled) {
+            this.configureSwaggerUi(baseUrl)
+        }
     }
 
     private configureSwaggerUi(baseUrl: string) {
@@ -160,23 +180,20 @@ export class ApiConsoleApp extends ApiApp {
         Object.keys(request.query)
             .forEach(q => apiRequest.queryStringParameters[q] = request.query[q])
 
-        // read request body (if any) as a base 64 string
-        return await new Promise<ApiRequest>((resolve, reject) => {
-            this.logger.debug("Reading request body as base64 string")
+        if (!ApiConsoleApp.HTTP_METHODS_WITH_ENTITY.includes(request.method)) {
+            // request HTTP method does not include a body
+            return apiRequest
+        }
 
-            let body = ""
+        // read request body as a base64 string
+        this.logger.debug("Reading request body as base64 string")
 
-            request.setEncoding("base64")
+        let body = request.body as Buffer
 
-            request.on("data", d => body += d)
-            request.on("end", () => {
-                apiRequest.body = body
-                apiRequest.isBase64Encoded = true
+        apiRequest.body = body.toString("base64")
+        apiRequest.isBase64Encoded = true
 
-                resolve(apiRequest)
-            })
-            request.on("error", reject)
-        })
+        return apiRequest
     }
 
     private forwardApiResponse(apiResponse: ApiResponse, response: Response) {
@@ -187,12 +204,16 @@ export class ApiConsoleApp extends ApiApp {
         response.status(apiResponse.statusCode)
         Object.keys(headers).forEach(h => response.header(h, headers[h]))
 
-        let body: any = apiResponse.body
-
         if (apiResponse.isBase64Encoded) {
-            body = Buffer.from(body, "base64")
-        }
+            response.contentType(
+                apiResponse.headers["content-type"] || "application/octet-stream"
+            )
 
-        response.send(body)
+            response.end(
+                Buffer.from(apiResponse.body, "base64")
+            )
+        } else {
+            response.send(apiResponse.body)
+        }
     }
 }
