@@ -2046,10 +2046,10 @@ trim@0.0.1:
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
   integrity sha1-WFhUf2spB1fulczMZm+1AITEYN0=
 
-ts-lambda-api@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-0.4.3.tgz#f93ab5abdfc31960a44869178fac592271c48f17"
-  integrity sha512-qmP0RDVjN50QzlKOluxqx/pLabQSAdsa6clekaxM+adkOWpahwc9wesQNm2CQTQxLxqAFn5lUBjoPBVm+OiG0g==
+ts-lambda-api@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-0.4.6.tgz#191e3e925aa90151f92240cba59ca0aec3032362"
+  integrity sha512-Zgzk6dnq4mGqre1qpylzMwZwp2NUv1Ef/l4hnYkI+gOrIglvqD2IQ3AB6Q1FOLEspN6gixUKII1nWrsA3OYbaw==
   dependencies:
     "@types/aws-lambda" "^8.10.19"
     fast-json-patch "^2.0.7"
@@ -2130,6 +2130,11 @@ typedoc-default-themes@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.5.0.tgz#6dc2433e78ed8bea8e887a3acde2f31785bd6227"
   integrity sha1-bcJDPnjti+qOiHo6zeLzF4W9Yic=
+
+typedoc-plugin-sourcefile-url@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-sourcefile-url/-/typedoc-plugin-sourcefile-url-1.0.4.tgz#a4054b834414eb62434dbe809eb689682b486002"
+  integrity sha512-vydiILnDDyOcmeLrOiigYchOuy/1SJm8dG2nznTizNPxv17HUVdLVLLscki1wleQQPc+Yd+PzNCjreXiAdL4ug==
 
 typedoc@^0.14.2:
   version "0.14.2"

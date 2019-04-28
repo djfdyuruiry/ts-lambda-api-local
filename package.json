@@ -1,7 +1,7 @@
 {
   "name": "ts-lambda-api-local",
   "description": "Test ts-lambda-api API's locally using express.",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/ts-lambda-api-local.git"
@@ -10,7 +10,7 @@
     "build": "yarn run lint && rm -rf dist && tsc && yarn docs",
     "build-all": "yarn run install-with-audit && yarn run build && yarn run build-tests",
     "build-tests": "rm -rf ./tests/js && tsc -p ./tests",
-    "docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --out ./docs",
+    "docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --sourcefile-url-prefix https://github.com/djfdyuruiry/ts-lambda-api-local/blob/master/src/ --out ./docs",
     "clean-install": "rm -rf node_modules && yarn install-with-audit",
     "install-with-audit": "yarn install --audit && yarn audit",
     "lint": "tslint 'src/**/*.ts'",
@@ -45,7 +45,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "swagger-ui-express": "^4.0.2",
-    "ts-lambda-api": "^0.4.3"
+    "ts-lambda-api": "^0.4.6"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
@@ -66,6 +66,7 @@
     "tslint": "^5.13.0",
     "typed-rest-client": "^1.1.2",
     "typedoc": "^0.14.2",
+    "typedoc-plugin-sourcefile-url": "^1.0.4",
     "typescript": "^3.3.3"
   }
 }

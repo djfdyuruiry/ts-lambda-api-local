@@ -2,7 +2,7 @@ import * as path from "path"
 
 import { injectable } from "inversify";
 import { Response } from "lambda-api";
-import { fromBody, header, produces, queryParam, response, GET, POST, Controller } from "ts-lambda-api";
+import { body, header, produces, queryParam, rawBody, response, GET, POST, Controller } from "ts-lambda-api";
 
 import { Message } from "./Message";
 
@@ -25,22 +25,22 @@ export class EchoController extends Controller {
     }
 
     @POST("/echo")
-    public echo(@fromBody message: Message, @response response: Response): Message {
+    public echo(@body message: Message, @response response: Response): Message {
         response.status(201)
 
         return message
     }
 
     @POST("/echo-body")
-    public echoBody(@fromBody message: any): Message {
+    public echoBody(@body message: any): Message {
         return message
     }
 
     @produces("application/octet-stream")
     @POST("/echo-binary-body")
-    public echoBinaryBody(@header("content-type") contentType: string) {
+    public echoBinaryBody(@rawBody body: Buffer, @header("content-type") contentType: string) {
         this.response
             .header("content-type", contentType)
-            .sendFile(Buffer.from(this.request.rawBody, 'base64'))
+            .sendFile(body)
     }
 }
