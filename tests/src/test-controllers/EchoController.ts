@@ -1,5 +1,3 @@
-import * as path from "path"
-
 import { injectable } from "inversify";
 import { Response } from "lambda-api";
 import { body, header, produces, queryParam, rawBody, response, GET, POST, Controller } from "ts-lambda-api";
@@ -8,8 +6,6 @@ import { Message } from "./Message";
 
 @injectable()
 export class EchoController extends Controller {
-    private static readonly TEST_FILE_PATH = path.join(__dirname, "../../test.pdf")
-
     @GET("/")
     public sayHello(): Message {
         return {
