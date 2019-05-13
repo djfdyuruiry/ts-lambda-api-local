@@ -2,7 +2,7 @@ import * as fs from "fs"
 import * as path from "path"
 import * as temp from "temp"
 
-import { Expect, TestFixture, AsyncTest, AsyncSetup, AsyncTeardown, TestCase } from "alsatian"
+import { AsyncTest, AsyncSetup, AsyncTeardown, Expect, TestFixture, TestCase } from "alsatian"
 import { sync as calculateFileMd5Sync } from "md5-file"
 import { RestClient } from "typed-rest-client"
 import { BasicCredentialHandler } from "typed-rest-client/Handlers"
@@ -194,6 +194,38 @@ export class ConsoleAcceptanceTests {
 
         Expect(response.message.statusCode).toBe(200)
         Expect(responseBody).toContain(`<div id="swagger-ui"></div>`)
+    }
+
+    @AsyncTest()
+    @TestCase(true)
+    @TestCase(false)
+    public async when_log_timestamps_is_configured_then_app_builds_without_exception(value: boolean) {
+        this.appConfig = new AppConfig()
+
+        this.appConfig.serverLogger.logTimestamp = value
+
+        await this.buildApp()
+    }
+
+    @AsyncTest()
+    @TestCase(null)
+    @TestCase(undefined)
+    public async when_server_logger_is_missing_then_app_builds_without_exception(value: any) {
+        this.appConfig = new AppConfig()
+
+        this.appConfig.serverLogger = value
+
+        await this.buildApp()
+    }
+
+
+    @AsyncTest()
+    @TestCase(null)
+    @TestCase(undefined)
+    public async when_config_is_missing_then_app_builds_without_exception(value: any) {
+        this.appConfig = value
+
+        await this.buildApp()
     }
 
     private async buildApp(configBlock?: (app: ApiConsoleApp) => void) {
