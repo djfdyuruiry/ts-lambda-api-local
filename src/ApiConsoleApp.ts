@@ -7,7 +7,7 @@ import { Server } from "http"
 import { Container } from "inversify"
 import { serve as serveSwaggerUi, setup as setupSwaggerUi } from "swagger-ui-express"
 
-import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig  } from "ts-lambda-api"
+import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig, ServerLoggerConfig, LogLevel  } from "ts-lambda-api"
 
 /**
  * Simple console application that hosts an express HTTP
@@ -31,7 +31,31 @@ export class ApiConsoleApp extends ApiApp {
 
     private server?: Server
 
+    /**
+     * Builds an new console app.
+     *
+     * If a value for`appConfig` is not passed, the `serverLogger`
+     * property is missing or the `serverLogger.logTimestamp` property
+     * is missing timestamps will be enabled for logger output.
+     */
     public constructor(controllersPath: string, appConfig?: AppConfig, appContainer?: Container) {
+        if (!appConfig) {
+            appConfig = new AppConfig()
+        }
+
+        if (!appConfig.serverLogger) {
+            appConfig.serverLogger = {
+                format: "string",
+                level: LogLevel.info,
+                logTimestamp: true
+            }
+        }
+
+        if (appConfig.serverLogger.logTimestamp === null ||
+            appConfig.serverLogger.logTimestamp === undefined) {
+            appConfig.serverLogger.logTimestamp = true
+        }
+
         super(controllersPath, appConfig, appContainer)
 
         this.logger = this.logFactory.getLogger(ApiConsoleApp)
