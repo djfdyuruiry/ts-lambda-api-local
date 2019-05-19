@@ -1,7 +1,7 @@
 {
   "name": "ts-lambda-api-local",
   "description": "Test ts-lambda-api API's locally using express.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/ts-lambda-api-local.git"
