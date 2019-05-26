@@ -1,7 +1,7 @@
 {
   "name": "ts-lambda-api-local",
   "description": "Test ts-lambda-api API's locally using express.",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/ts-lambda-api-local.git"
@@ -11,11 +11,11 @@
     "build-all": "yarn clean-install && yarn build && yarn build-tests",
     "build-tests": "rm -rf ./tests/js && tsc -p ./tests",
     "clean-install": "rm -rf node_modules && yarn install && yarn improved-audit",
-    "docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --sourcefile-url-prefix https://github.com/djfdyuruiry/ts-lambda-api-local/blob/master/src/ --out ./docs",
+    "docs": "./scripts/generateDocs.sh",
     "improved-audit": "improved-yarn-audit -e $(cat .audit-exceptions)",
     "lint": "tslint 'src/**/*.ts'",
     "shell": "$SHELL",
-    "test": "yarn build-all && scripts/runTests.sh",
+    "test": "yarn build-all && ./scripts/runTests.sh",
     "test-app": "yarn build-all && node ./tests/js/test-components/TestApp.js"
   },
   "main": "dist/ts-lambda-api-local.js",
@@ -44,7 +44,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "swagger-ui-express": "^4.0.4",
-    "ts-lambda-api": "^0.6.0"
+    "ts-lambda-api": "^0.6.1"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
