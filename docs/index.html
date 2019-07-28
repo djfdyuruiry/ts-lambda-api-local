@@ -64,14 +64,18 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="ts-lambda-api-local">ts-lambda-api-local</h1>
+				<a href="#ts-lambda-api-local" id="ts-lambda-api-local" style="color: inherit; text-decoration: none;">
+					<h1>ts-lambda-api-local</h1>
+				</a>
 				<p>Extension module for the <code>ts-lambda-api</code> package which enables running lambda REST API&#39;s locally using express.</p>
 				<p>This module also provides Swagger UI support, powered by the <code>swagger-ui-express</code> npm package.</p>
 				<p><a href="https://www.npmjs.com/package/ts-lambda-api-local">NPM Package</a>
 				<a href="https://github.com/djfdyuruiry/ts-lambda-api-local/">GitHub Repo</a></p>
 				<p>Read the full <code>typedoc</code> documentation: <a href="https://djfdyuruiry.github.io/ts-lambda-api-local/">https://djfdyuruiry.github.io/ts-lambda-api-local/</a></p>
 				<hr>
-				<h2 id="getting-started">Getting Started</h2>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h2>Getting Started</h2>
+				</a>
 				<hr>
 				<p><strong>Note: These steps modify an existing <code>ts-lambda-api</code> app. If you don&#39;t have one, see the package documentation.</strong></p>
 				<ul>
@@ -97,7 +101,9 @@ app.runServer(process.argv)</code></pre>
 					</li>
 				</ul>
 				<pre><code>wget -qO - http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8080</span><span class="hljs-regexp">/api/</span>v1<span class="hljs-regexp">/some-controller/</span></code></pre><hr>
-				<h1 id="command-line-arguments">Command Line Arguments</h1>
+				<a href="#command-line-arguments" id="command-line-arguments" style="color: inherit; text-decoration: none;">
+					<h1>Command Line Arguments</h1>
+				</a>
 				<hr>
 				<p><code>ApiConsoleApp</code> supports several optional command line parameters.</p>
 				<ul>
@@ -106,11 +112,15 @@ app.runServer(process.argv)</code></pre>
 					<li><code>-c</code> or <code>--cors-origin</code>: CORS origins to allow, defaults to <code>*</code> (any origin)</li>
 				</ul>
 				<hr>
-				<h1 id="configuration">Configuration</h1>
+				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
+					<h1>Configuration</h1>
+				</a>
 				<hr>
 				<p>Both the <code>configureApp</code> and <code>configureApi</code> methods documented in <code>ts-lambda-api</code> are available in the <code>ApiConsoleApp</code> class.</p>
 				<hr>
-				<h1 id="swagger-ui">Swagger UI</h1>
+				<a href="#swagger-ui" id="swagger-ui" style="color: inherit; text-decoration: none;">
+					<h1>Swagger UI</h1>
+				</a>
 				<hr>
 				<p>To enable the Swagger UI page, simply enable open-api in your application config. The interface will then be available from the <code>/swagger</code> endpoint. For example, if you configured your app like below:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">"path"</span>
@@ -129,7 +139,9 @@ appConfig.openApi.enabled = <span class="hljs-literal">true</span>
 app.runServer(process.argv)</code></pre>
 				<p>Then, the Swagger UI interface will be available @ <a href="http://localhost:8080/api/v1/swagger">http://localhost:8080/api/v1/swagger</a></p>
 				<hr>
-				<h1 id="packaging-for-release">Packaging for Release</h1>
+				<a href="#packaging-for-release" id="packaging-for-release" style="color: inherit; text-decoration: none;">
+					<h1>Packaging for Release</h1>
+				</a>
 				<hr>
 				<p>When you are packing up your lambda API for release to AWS, ensure that you have installed this package as a development dependency only, otherwise it will significantly slow down and bloat your lambda.</p>
 			</div>
@@ -164,6 +176,7 @@ app.runServer(process.argv)</code></pre>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -212,7 +225,7 @@ app.runServer(process.argv)</code></pre>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
