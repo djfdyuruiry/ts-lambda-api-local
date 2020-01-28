@@ -2234,10 +2234,10 @@ trim@0.0.1:
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
   integrity sha1-WFhUf2spB1fulczMZm+1AITEYN0=
 
-ts-lambda-api@^0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-0.7.3.tgz#467ea7dd65263077128e27f4652967d843dd9958"
-  integrity sha512-1JUxn0QLGsceL8F56ZHOyo6vm9xdNff9gDedOJEjaiPTMqOF9IfQIVGS4pkLc9RP14RBRqs2UHJvPRsajDI6VQ==
+ts-lambda-api@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-0.8.0.tgz#6981e4840f8b27b4ccd400938e00b6934f881a7b"
+  integrity sha512-p4r2+3R6Ys/yo9KpeMiJf2n9JLhmKXCvOM3uH/v7wwc0xis7/vmpJUj4gg97HyYBlTjmMf7zNNFOA1he2hTpWQ==
   dependencies:
     "@types/aws-lambda" "^8.10.40"
     fast-json-patch "^3.0.0-1"
