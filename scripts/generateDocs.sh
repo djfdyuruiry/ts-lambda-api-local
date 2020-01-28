@@ -18,7 +18,7 @@ function generateTypedoc() {
 
     typedoc --mode file \
         --excludePrivate \
-        --sourcefile-url-prefix "${projectGithubUrl}" \
+        --sourcefile-link-prefix "${projectGithubUrl}" \
         --out ./docs
 }
 

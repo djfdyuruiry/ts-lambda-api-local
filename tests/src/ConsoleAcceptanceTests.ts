@@ -2,7 +2,7 @@ import * as fs from "fs"
 import * as path from "path"
 import * as temp from "temp"
 
-import { AsyncTest, AsyncSetup, AsyncTeardown, Expect, TestFixture, TestCase } from "alsatian"
+import { Expect, Setup, Teardown, Test, TestFixture, TestCase } from "alsatian"
 import { sync as calculateFileMd5Sync } from "md5-file"
 import { RestClient } from "typed-rest-client"
 import { BasicCredentialHandler } from "typed-rest-client/Handlers"
@@ -28,7 +28,7 @@ export class ConsoleAcceptanceTests {
     private restClient: RestClient
     private httpClient: HttpClient
 
-    @AsyncSetup
+    @Setup
     public async setup() {
         this.restClient = new RestClient(
             "alsatian tests",
@@ -43,12 +43,12 @@ export class ConsoleAcceptanceTests {
         await this.buildApp()
     }
 
-    @AsyncTeardown
+    @Teardown
     public async teardown() {
         await this.app.stopServer()
     }
 
-    @AsyncTest()
+    @Test()
     public async when_valid_http_get_request_sent_then_app_returns_response_body_and_200_ok() {
         let response = await this.restClient.get<Message>("/")
 
@@ -56,7 +56,7 @@ export class ConsoleAcceptanceTests {
         Expect(response.result.text).toBe("hello")
     }
 
-    @AsyncTest()
+    @Test()
     public async when_valid_http_post_json_request_sent_then_app_returns_response_body_and_201_created() {
         let message: Message = { text: "hello there" }
         let response = await this.restClient.create<Message>("/echo", message)
@@ -65,7 +65,7 @@ export class ConsoleAcceptanceTests {
         Expect(response.result).toEqual(message)
     }
 
-    @AsyncTest()
+    @Test()
     public async when_valid_http_post_request_sent_then_app_returns_response_body_and_200_ok() {
         let body = "I am the body of the POST request, so I am"
         let response = await this.httpClient.post(
@@ -77,7 +77,7 @@ export class ConsoleAcceptanceTests {
         Expect(await response.readBody()).toEqual(body)
     }
 
-    @AsyncTest()
+    @Test()
     public async when_valid_http_get_request_sent_then_app_returns_binary_response_body_and_200_ok() {
         let response: IHttpClientResponse
         let testFileStream = fs.createReadStream(ConsoleAcceptanceTests.TEST_FILE_PATH)
@@ -120,7 +120,7 @@ export class ConsoleAcceptanceTests {
         )
     }
 
-    @AsyncTest()
+    @Test()
     public async when_valid_http_get_request_with_query_param_sent_then_app_passes_param_to_endpoint() {
         let response = await this.restClient.get<Message>("/query?message=hello from query")
 
@@ -128,7 +128,7 @@ export class ConsoleAcceptanceTests {
         Expect(response.result.text).toBe("hello from query")
     }
 
-    @AsyncTest()
+    @Test()
     public async when_app_has_basic_auth_configured_and_request_received_with_correct_credentials_then_app_returns_200_ok() {
         await this.buildApp(app =>
             app.middlewareRegistry.addAuthFilter(new TestAuthFilter())
@@ -143,7 +143,7 @@ export class ConsoleAcceptanceTests {
         Expect(response.statusCode).toBe(200)
     }
 
-    @AsyncTest()
+    @Test()
     public async when_app_has_basic_auth_configured_and_request_received_with_incorrect_credentials_then_app_returns_401_unauthorized() {
         await this.buildApp(app =>
             app.middlewareRegistry.addAuthFilter(new TestAuthFilter())
@@ -157,7 +157,7 @@ export class ConsoleAcceptanceTests {
             .toThrowErrorAsync(Error, "Failed request: (401)")
     }
 
-    @AsyncTest()
+    @Test()
     public async when_app_has_basic_auth_configured_and_request_received_without_credentials_then_app_returns_401_unauthorized() {
         await this.buildApp(app =>
             app.middlewareRegistry.addAuthFilter(new TestAuthFilter())
@@ -169,7 +169,7 @@ export class ConsoleAcceptanceTests {
 
     @TestCase("--port")
     @TestCase("-p")
-    @AsyncTest()
+    @Test()
     public async when_port_set_in_app_args_then_app_listens_on_given_port(portFlag: string) {
         this.appArgs = [portFlag, "3669"]
 
@@ -180,7 +180,7 @@ export class ConsoleAcceptanceTests {
         Expect(response.message.statusCode).toBe(200)
     }
 
-    @AsyncTest()
+    @Test()
     public async when_openapi_is_enabled_then_app_serves_swagger_ui() {
         this.appConfig = new AppConfig()
         this.appConfig.openApi.enabled = true
@@ -196,7 +196,7 @@ export class ConsoleAcceptanceTests {
         Expect(responseBody).toContain(`<div id="swagger-ui"></div>`)
     }
 
-    @AsyncTest()
+    @Test()
     @TestCase(true)
     @TestCase(false)
     public async when_log_timestamps_is_configured_then_app_builds_without_exception(value: boolean) {
@@ -207,7 +207,7 @@ export class ConsoleAcceptanceTests {
         await this.buildApp()
     }
 
-    @AsyncTest()
+    @Test()
     @TestCase(null)
     @TestCase(undefined)
     public async when_server_logger_is_missing_then_app_builds_without_exception(value: any) {
@@ -219,7 +219,7 @@ export class ConsoleAcceptanceTests {
     }
 
 
-    @AsyncTest()
+    @Test()
     @TestCase(null)
     @TestCase(undefined)
     public async when_config_is_missing_then_app_builds_without_exception(value: any) {
