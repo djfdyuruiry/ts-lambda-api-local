@@ -9,6 +9,7 @@ projectPath="$(pwd)"
 function cleanUpDocUrls() {
     sed -i "s^${projectGithubUrl}${projectPath}/node_modules/ts-lambda-api/dist/^${tlaGithubUrl}/^" "${docHtmlPath}"
     sed -i "s^${projectPath}/node_modules/ts-lambda-api/dist/^^" "${docHtmlPath}"
+    sed -i "s^/node_modules/ts-lambda-api/dist/\\([^<]+\\)<^<a href="${tlaGithubUrl}/\\1" /><^" "${docHtmlPath}"
     sed -E -i "s/.d.ts:[0-9]+/.ts/" "${docHtmlPath}"
     sed -E -i "s/.d.ts#L[0-9]+/.ts/" "${docHtmlPath}"
 }
@@ -18,6 +19,8 @@ function generateTypedoc() {
 
     typedoc --mode file \
         --excludePrivate \
+        --includeVersion \
+        --gitRevision master \
         --sourcefile-link-prefix "${projectGithubUrl}" \
         --out ./docs
 }
