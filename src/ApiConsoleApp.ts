@@ -38,7 +38,7 @@ export class ApiConsoleApp extends ApiApp {
      * property is missing or the `serverLogger.logTimestamp` property
      * is missing timestamps will be enabled for logger output.
      */
-    public constructor(controllersPath: string, appConfig?: AppConfig, appContainer?: Container) {
+    public constructor(controllersPath: string[], appConfig?: AppConfig, appContainer?: Container) {
         if (!appConfig) {
             appConfig = new AppConfig()
         }
