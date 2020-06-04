@@ -234,7 +234,7 @@ export class ConsoleAcceptanceTests {
         }
 
         this.app = new ApiConsoleApp(
-            [ path.join(__dirname, "test-controllers") ],
+            path.join(__dirname, "test-controllers"),
             this.appConfig
         )
 

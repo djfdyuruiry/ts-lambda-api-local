@@ -10,7 +10,7 @@ appConfig.openApi.enabled = true
 appConfig.serverLogger.level = LogLevel.trace
 
 let app = new ApiConsoleApp(
-    [ path.join(__dirname, "../test-controllers") ],
+    path.join(__dirname, "../test-controllers"),
     appConfig
 )
 
