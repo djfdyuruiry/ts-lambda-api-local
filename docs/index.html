@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ts-lambda-api-local - v2.0.0</title>
-	<meta name="description" content="Documentation for ts-lambda-api-local - v2.0.0">
+	<title>ts-lambda-api-local - v2.1.0</title>
+	<meta name="description" content="Documentation for ts-lambda-api-local - v2.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">ts-lambda-api-local - v2.0.0</a>
+					<a href="index.html" class="title">ts-lambda-api-local - v2.1.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>ts-lambda-api-local - v2.0.0</h1>
+			<h1>ts-lambda-api-local - v2.1.0</h1>
 		</div>
 	</div>
 </header>
@@ -86,12 +86,12 @@ npm install -D @types/node</code></pre>
 				<ul>
 					<li>Create a new typescript file, add the following:</li>
 				</ul>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">"path"</span>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;path&quot;</span>
 
-<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">"ts-lambda-api-local"</span>
+<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;ts-lambda-api-local&quot;</span>
 
-<span class="hljs-comment">// if you use a different directory, point to it here instead of 'controllers'</span>
-<span class="hljs-keyword">let</span> app = <span class="hljs-keyword">new</span> ApiConsoleApp(path.join(__dirname, <span class="hljs-string">"controllers"</span>))
+<span class="hljs-comment">// if you use a different directory, point to it here instead of &#x27;controllers&#x27;</span>
+<span class="hljs-keyword">let</span> app = <span class="hljs-keyword">new</span> ApiConsoleApp(path.join(__dirname, <span class="hljs-string">&quot;controllers&quot;</span>))
 
 app.runServer(process.argv)</code></pre>
 				<ul>
@@ -123,18 +123,18 @@ app.runServer(process.argv)</code></pre>
 				</a>
 				<hr>
 				<p>To enable the Swagger UI page, simply enable open-api in your application config. The interface will then be available from the <code>/swagger</code> endpoint. For example, if you configured your app like below:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">"path"</span>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;path&quot;</span>
 
-<span class="hljs-keyword">import</span> { AppConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">"ts-lambda-api"</span>
-<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">"ts-lambda-api-local"</span>
+<span class="hljs-keyword">import</span> { AppConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;ts-lambda-api&quot;</span>
+<span class="hljs-keyword">import</span> { ApiConsoleApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;ts-lambda-api-local&quot;</span>
 
 <span class="hljs-keyword">let</span> appConfig = <span class="hljs-keyword">new</span> AppConfig()
 
-appConfig.base = <span class="hljs-string">"/api/v1"</span>
-appConfig.version = <span class="hljs-string">"v1"</span>
+appConfig.base = <span class="hljs-string">&quot;/api/v1&quot;</span>
+appConfig.version = <span class="hljs-string">&quot;v1&quot;</span>
 appConfig.openApi.enabled = <span class="hljs-literal">true</span>
 
-<span class="hljs-keyword">let</span> app = <span class="hljs-keyword">new</span> ApiConsoleApp(path.join(__dirname, <span class="hljs-string">"controllers"</span>))
+<span class="hljs-keyword">let</span> app = <span class="hljs-keyword">new</span> ApiConsoleApp(path.join(__dirname, <span class="hljs-string">&quot;controllers&quot;</span>))
 
 app.runServer(process.argv)</code></pre>
 				<p>Then, the Swagger UI interface will be available @ <a href="http://localhost:8080/api/v1/swagger">http://localhost:8080/api/v1/swagger</a></p>
@@ -186,6 +186,5 @@ app.runServer(process.argv)</code></pre>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
