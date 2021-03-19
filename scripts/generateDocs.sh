@@ -17,7 +17,7 @@ function cleanUpDocUrls() {
 function generateTypedoc() {
     rm -rf ./docs
 
-    typedoc --mode file \
+    typedoc --entryPoints ./src/ts-lambda-api-local.ts \
         --excludePrivate \
         --includeVersion \
         --gitRevision master \
