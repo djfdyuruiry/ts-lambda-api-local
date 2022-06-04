@@ -4,7 +4,7 @@ set -e
 projectGithubUrl="https://github.com/djfdyuruiry/ts-lambda-api-local/blob/master/src"
 tlaGithubUrl="https://github.com/djfdyuruiry/ts-lambda-api/blob/master/src"
 projectPath="$(pwd)"
-docHtmlPath="${projectPath}/docs/classes/apiconsoleapp.html"
+docHtmlPath="${projectPath}/docs/classes/ApiConsoleApp.html"
 
 function cleanUpDocUrls() {
     sed -i "s^${projectGithubUrl}${projectPath}/node_modules/ts-lambda-api/dist/^${tlaGithubUrl}/^g" "${docHtmlPath}"
@@ -21,7 +21,6 @@ function generateTypedoc() {
         --excludePrivate \
         --includeVersion \
         --gitRevision master \
-        --sourcefile-link-prefix "${projectGithubUrl}" \
         --out ./docs
 }
 
