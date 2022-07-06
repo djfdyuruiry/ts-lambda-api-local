@@ -32,7 +32,8 @@ import * as path from "path"
 import { ApiConsoleApp } from "ts-lambda-api-local"
 
 // if you use a different directory, point to it here instead of 'controllers'
-let app = new ApiConsoleApp(path.join(__dirname, "controllers"))
+const controllersPath = [path.join(__dirname, 'controllers')]
+let app = new ApiConsoleApp(controllersPath)
 
 app.runServer(process.argv)
 ```
