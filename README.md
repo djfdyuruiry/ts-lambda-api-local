@@ -86,7 +86,8 @@ appConfig.base = "/api/v1"
 appConfig.version = "v1"
 appConfig.openApi.enabled = true
 
-let app = new ApiConsoleApp(path.join(__dirname, "controllers"))
+const controllersPath = [path.join(__dirname, 'controllers')]
+let app = new ApiConsoleApp(controllersPath)
 
 app.runServer(process.argv)
 ```
