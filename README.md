@@ -25,15 +25,20 @@ npm install -D @types/node
 ```
 
 - Create a new typescript file, add the following:
-
 ```typescript
-import * as path from "path"
+import * as path from 'path'
+import { AppConfig } from 'ts-lambda-api'
 
-import { ApiConsoleApp } from "ts-lambda-api-local"
+import { ApiConsoleApp } from 'ts-lambda-api-local'
+
+const appConfig = new AppConfig()
+
+appConfig.base = '/api/v1'
+appConfig.version = 'v1'
 
 // if you use a different directory, point to it here instead of 'controllers'
 const controllersPath = [path.join(__dirname, 'controllers')]
-let app = new ApiConsoleApp(controllersPath)
+let app = new ApiConsoleApp(controllersPath, appConfig)
 
 app.runServer(process.argv)
 ```
@@ -43,7 +48,7 @@ app.runServer(process.argv)
 - You can now call your API locally:
 
 ```
-wget -qO - http://localhost:8080/api/v1/some-controller/
+wget -qO - http://localhost:8080/api/v1/hello-world/
 ```
 
 ----
@@ -75,19 +80,20 @@ Both the `configureApp` and `configureApi` methods documented in `ts-lambda-api`
 To enable the Swagger UI page, simply enable open-api in your application config. The interface will then be available from the `/swagger` endpoint. For example, if you configured your app like below:
 
 ```typescript
-import * as path from "path"
+import * as path from 'path'
+import { AppConfig } from 'ts-lambda-api'
 
-import { AppConfig } from "ts-lambda-api"
-import { ApiConsoleApp } from "ts-lambda-api-local"
+import { ApiConsoleApp } from 'ts-lambda-api-local'
 
-let appConfig = new AppConfig()
+const appConfig = new AppConfig()
 
-appConfig.base = "/api/v1"
-appConfig.version = "v1"
+appConfig.base = '/api/v1'
+appConfig.version = 'v1'
 appConfig.openApi.enabled = true
 
+// if you use a different directory, point to it here instead of 'controllers'
 const controllersPath = [path.join(__dirname, 'controllers')]
-let app = new ApiConsoleApp(controllersPath)
+let app = new ApiConsoleApp(controllersPath, appConfig)
 
 app.runServer(process.argv)
 ```
