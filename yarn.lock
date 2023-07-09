@@ -4521,10 +4521,10 @@ trim@0.0.1, trim@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim/-/trim-1.0.1.tgz#68e78f6178ccab9687a610752f4f5e5a7022ee8c"
   integrity sha512-3JVP2YVqITUisXblCDq/Bi4P9457G/sdEamInkyvCsjbTcXLXIiG7XCb4kGMFWh6JGXesS3TKxOPtrncN/xe8w==
 
-ts-lambda-api@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-2.4.0.tgz#8b023e37ab3a0ae47629a6f2827d76a4c9a067f1"
-  integrity sha512-x5ClTwMPp5SnxlPDA2ATfcWiUlcIzlovLrxyd/ygINZ4psREu+6dlQkwZ4rRzbFU1VfBemz22coi6kcVTbNxXA==
+ts-lambda-api@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-2.4.1.tgz#589e1a22b4c66e273b53e6efefc336d1901dae21"
+  integrity sha512-V49Aa+EkXgbDzZPPP7cuc0JfLwxwGHy6YGqTKL14rSLxqVhtEZOFQOB5oUlEyk2kSioRcFcR+Dr7eTNHwLNIIA==
   dependencies:
     "@types/aws-lambda" "^8.10.98"
     fast-json-patch "^3.1.1"
@@ -4823,10 +4823,15 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yaml@^1.10.2, yaml@^2.2.2:
+yaml@^1.10.2:
   version "1.10.2"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
+
+yaml@^2.2.2:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.3.1.tgz#02fe0975d23cd441242aa7204e09fc28ac2ac33b"
+  integrity sha512-2eHWfjaoXgTBC2jNM1LRef62VQa0umtvRiDSk6HSzW7RvS5YtkabJrwYLLEKWBc8a5U2PTSCs+dJjUTJdlHsWQ==
 
 yargs-parser@^18.1.2:
   version "18.1.3"
