@@ -7,7 +7,7 @@ import { Server } from "http"
 import { Container } from "inversify"
 import { serve as serveSwaggerUi, setup as setupSwaggerUi } from "swagger-ui-express"
 
-import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig, ServerLoggerConfig, LogLevel  } from "ts-lambda-api"
+import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig, LogLevel  } from "ts-lambda-api"
 
 /**
  * Simple console application that hosts an express HTTP
@@ -19,7 +19,7 @@ import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig, ServerLoggerConfig, 
  * returned to the express client.
  */
 export class ApiConsoleApp extends ApiApp {
-    private static readonly MAX_REQUEST_BODY_SIZE = "6144kb"
+    private static readonly MAX_REQUEST_BODY_SIZE = "10000kb"
     private static readonly HTTP_METHODS_WITH_ENTITY = ["POST", "PUT", "PATCH"]
     private static readonly APP_OPTIONS: OptionDefinition[] = [
         { name: "port", alias: "p", type: Number, defaultValue: 8080 },
@@ -73,10 +73,11 @@ export class ApiConsoleApp extends ApiApp {
      * @param args Command line arguments for this server, see --help for more info.
      */
     public async runServer(args: string[]) {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         let self = this
         let options = this.parseArguments(args)
         let listenOnAllHosts = options.host === "*"
-        let baseUrl = `http://${options.host}:${options.port}`
+        let baseUrl = `http://${options.host as string}:${options.port as number}`
 
         this.logger.debug("Server base URL: %s", baseUrl)
 
@@ -86,6 +87,7 @@ export class ApiConsoleApp extends ApiApp {
 
         this.expressApp.all(
             "*",
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             (req, res, next) => self.handleHttpRequest(self, req, res, next)
         )
 
@@ -123,7 +125,7 @@ export class ApiConsoleApp extends ApiApp {
         // setup body parser to Base64 encode request's
         this.expressApp.use(rawBodyParser({
             limit: ApiConsoleApp.MAX_REQUEST_BODY_SIZE,
-            type: r => true
+            type: () => true
         }))
 
         this.logger.warn(
@@ -184,7 +186,7 @@ export class ApiConsoleApp extends ApiApp {
         try {
             this.logger.debug("Mapping express request to AWS model")
 
-            let apiRequestEvent = await self.mapRequestToApiEvent(request)
+            let apiRequestEvent = self.mapRequestToApiEvent(request)
             let apiResponse = await self.run(apiRequestEvent, {})
 
             self.forwardApiResponse(apiResponse, response)
@@ -193,7 +195,7 @@ export class ApiConsoleApp extends ApiApp {
         }
     }
 
-    private async mapRequestToApiEvent(request: Request): Promise<ApiRequest> {
+    private mapRequestToApiEvent(request: Request): ApiRequest {
         let apiRequest = new ApiRequest()
 
         apiRequest.httpMethod = request.method
