@@ -19,7 +19,7 @@ import { ApiApp, ApiRequest, ApiResponse, timed, AppConfig, LogLevel  } from "ts
  * returned to the express client.
  */
 export class ApiConsoleApp extends ApiApp {
-    private static readonly MAX_REQUEST_BODY_SIZE = "6144kb"
+    private static readonly MAX_REQUEST_BODY_SIZE = "10000kb"
     private static readonly HTTP_METHODS_WITH_ENTITY = ["POST", "PUT", "PATCH"]
     private static readonly APP_OPTIONS: OptionDefinition[] = [
         { name: "port", alias: "p", type: Number, defaultValue: 8080 },

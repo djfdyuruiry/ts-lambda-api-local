@@ -27,6 +27,7 @@ export class ConsoleAcceptanceTests {
     private appConfig: AppConfig
     private restClient: RestClient
     private httpClient: HttpClient
+    private outputFile: temp.OpenFile
 
     @Setup
     public async setup() {
@@ -40,12 +41,15 @@ export class ConsoleAcceptanceTests {
 
         this.appArgs = []
 
+        this.outputFile = temp.openSync()
+
         await this.buildApp()
     }
 
     @Teardown
     public async teardown() {
         await this.app.stopServer()
+        fs.rmSync(this.outputFile.path)
     }
 
     @Test()
@@ -95,8 +99,7 @@ export class ConsoleAcceptanceTests {
             testFileStream.close()
         }
 
-        let outputFile = temp.openSync()
-        let outputStream = fs.createWriteStream(null, { fd: outputFile.fd })
+        let outputStream = fs.createWriteStream(null, { fd: this.outputFile.fd })
 
         try {
             response.message.pipe(outputStream)
@@ -108,13 +111,13 @@ export class ConsoleAcceptanceTests {
         Expect(response.message.statusCode).toEqual(200)
 
         Expect(
-            fs.statSync(outputFile.path).size
+            fs.statSync(this.outputFile.path).size
         ).toBe(
             ConsoleAcceptanceTests.TEST_FILE_SIZE
         )
 
         Expect(
-            calculateFileMd5Sync(outputFile.path)
+            calculateFileMd5Sync(this.outputFile.path)
         ).toBe(
             ConsoleAcceptanceTests.TEST_FILE_MD5
         )
