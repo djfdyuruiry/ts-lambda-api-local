@@ -30,15 +30,18 @@ export class ApiConsoleApp extends ApiApp {
     protected readonly expressApp: Application
 
     private server?: Server
-
     /**
      * Builds an new console app.
      *
-     * If a value for`appConfig` is not passed, the `serverLogger`
-     * property is missing or the `serverLogger.logTimestamp` property
-     * is missing timestamps will be enabled for logger output.
+     * If `appConfig` is not passed or the `serverLogger` property is missing, timestamps will be enabled for logger output.
+     *
+     * @param controllersPath - The path to the directory containing the API controllers.
+     * @param appConfig - Optional configuration for the application. If not provided, default values will be used.
+     * @param autoInjectionEnabled - Whether automatic dependency injection is enabled. Defaults to `true` if not provided.
+     * @param appContainer - An optional container for managing dependencies. If not provided, a new one will be created.
+     *                       You must ensure `autoInjectionEnabled` reflects your IOC config if you provide an instance here.
      */
-    public constructor(controllersPath: string[], appConfig?: AppConfig, appContainer?: Container) {
+    public constructor(controllersPath: string[], appConfig?: AppConfig, autoInjectionEnabled?: boolean, appContainer?: Container) {
         if (!appConfig) {
             appConfig = new AppConfig()
         }
@@ -56,7 +59,7 @@ export class ApiConsoleApp extends ApiApp {
             appConfig.serverLogger.logTimestamp = true
         }
 
-        super(controllersPath, appConfig, appContainer)
+        super(controllersPath, appConfig, autoInjectionEnabled, appContainer)
 
         this.logger = this.logFactory.getLogger(ApiConsoleApp)
         this.expressApp = express()
@@ -86,8 +89,7 @@ export class ApiConsoleApp extends ApiApp {
         this.configureServer(baseUrl, options)
 
         this.expressApp.all(
-            "*",
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            "{*path}",
             (req, res, next) => self.handleHttpRequest(self, req, res, next)
         )
 
@@ -107,7 +109,7 @@ export class ApiConsoleApp extends ApiApp {
                     )
                 }
             } catch (ex) {
-                reject(ex)
+                reject(ex as Error)
             }
         })
 
@@ -168,7 +170,7 @@ export class ApiConsoleApp extends ApiApp {
             try {
                 this.server.close(() => resolve())
             } catch (ex) {
-                reject(ex)
+                reject(ex as Error)
             }
         })
     }
