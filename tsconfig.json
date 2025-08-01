@@ -15,9 +15,9 @@
                 "src/types/*"
             ]
         },
-        "target": "es2017",
+        "target": "ES2024",
         "lib": [
-            "es2017"
+            "ES2024"
         ]
     },
     "include": [
