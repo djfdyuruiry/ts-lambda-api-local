@@ -5027,10 +5027,10 @@ ts-api-utils@^2.1.0:
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-2.1.0.tgz#595f7094e46eed364c13fd23e75f9513d29baf91"
   integrity sha512-CUgTZL1irw8u29bzrOD/nH85jqyc74D6SshFgujOIA7osm2Rz7dYH77agkx7H4FBNxDq7Cjf+IjaX/8zwFW+ZQ==
 
-ts-lambda-api@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-2.5.1.tgz#b7ed154f986e9631f8432d838548ada895e829ee"
-  integrity sha512-gSDKKCAuEJwJ5Y5jBWtnvM1u9em3++fmz7GhYa/I/wsnM6dbG/iUB83M360byL2gYNDtEuAwyJsPjYlFQpOV/A==
+ts-lambda-api@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/ts-lambda-api/-/ts-lambda-api-2.5.2.tgz#49925b8a36b2b2e7293e3497dbbd66118ab700bd"
+  integrity sha512-vYh8Q5wCBhbNJMjQfBgu0OQdFtH4v7W1eWY/IJzVpo9aRCdOABg2wtr6+6hr9B1Mk1tLe4WwfXukqOUZR8p/nQ==
   dependencies:
     "@types/aws-lambda" "^8.10.152"
     fast-json-patch "^3.1.1"
