@@ -21,7 +21,9 @@ Read the full `typedoc` documentation: https://djfdyuruiry.github.io/ts-lambda-a
 
 ```shell
 npm install -D ts-lambda-api-local
-npm install -D @types/node
+
+# change this if using a different node runtime
+npm install -D @types/node@^24.1.0
 ```
 
 - Create a new typescript file, add the following:
