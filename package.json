@@ -1,7 +1,7 @@
 {
   "name": "ts-lambda-api-local",
   "description": "Test ts-lambda-api API's locally using express.",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/djfdyuruiry/ts-lambda-api-local.git"
@@ -39,14 +39,14 @@
     ]
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1009.0",
-    "@aws-sdk/s3-request-presigner": "^3.1009.0",
+    "@aws-sdk/client-s3": "^3.1014.0",
+    "@aws-sdk/s3-request-presigner": "^3.1014.0",
     "command-line-args": "^6.0.1",
     "cors": "^2.8.6",
     "express": "^5.1.0",
     "semver": "^7.7.4",
     "swagger-ui-express": "^5.0.1",
-    "ts-lambda-api": "^2.5.4"
+    "ts-lambda-api": "^2.5.5"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.3",
@@ -62,7 +62,7 @@
     "@typescript-eslint/eslint-plugin": "^8.57.1",
     "@typescript-eslint/parser": "^8.57.1",
     "alsatian": "^3.2.1",
-    "eslint": "^10.0.3",
+    "eslint": "^10.1.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsdoc": "^62.8.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
